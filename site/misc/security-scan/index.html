@@ -1,0 +1,4337 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://interview-docs.com/misc/security-scan/">
+      
+      
+        <link rel="prev" href="../agile/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.7">
+    
+    
+      
+        <title>Security Scan Tools - Interview Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#security-scanning-tools" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Interview Docs" class="md-header__button md-logo" aria-label="Interview Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Interview Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Security Scan Tools
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../java/" class="md-tabs__link">
+          
+  
+    
+  
+  Languages
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../spring/" class="md-tabs__link">
+          
+  
+    
+  
+  Web Development
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mq/kafka/" class="md-tabs__link">
+          
+  
+    
+  
+  MQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../devops/" class="md-tabs__link">
+          
+  
+    
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../db/" class="md-tabs__link">
+          
+  
+    
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+    
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../design-pattern/" class="md-tabs__link">
+          
+  
+    
+  
+  Design Pattern
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ds-algo/" class="md-tabs__link">
+          
+  
+    
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../qa/" class="md-tabs__link">
+          
+  
+    
+  
+  QA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../assessment/angular/" class="md-tabs__link">
+          
+  
+    
+  
+  Assessment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projects/company/" class="md-tabs__link">
+          
+  
+    
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../agile/" class="md-tabs__link">
+          
+  
+    
+  
+  Misc
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Interview Docs" class="md-nav__button md-logo" aria-label="Interview Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Interview Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Languages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Languages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../java/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 8
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../nodejs/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Node.js
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Node.js
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nodejs/express/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Express.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../python/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../golang/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Golang
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Golang
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Web Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Web Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../spring/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/security/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-mvc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring MVC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../microservices/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Microservices
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Microservices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../microservices/solid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SOLID
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../angular/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Angular
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Angular
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../angular/typescript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../react/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            React
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lifecycle Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/enzyme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enzyme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/eslint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESLint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/react-router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Router
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/redux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    MQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/kafka/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache Kafka
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/rebbitmq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/activemq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache ActiveMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/sqs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Amazon SQS (Simple Queue Service)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/servicebus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microsoft Azure sqs.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/pubsub/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Cloud Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../devops/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            DevOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/aws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/azure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/gcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/openshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenShift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/vcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VCS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization and Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/iac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure as Code (IaC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Monitoring and Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Container Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/scanning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scanning and Compliance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/artifact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifact Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/gitops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../db/" class="md-nav__link ">
+              
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/cassandra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cassandra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/couchbase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Couchbase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/dynamoDB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DynamoDB.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/mongodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MongoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/oracle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Oracle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/postgreSql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PostgreSql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../design-pattern/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Design Pattern
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Design Pattern
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/behavioral-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Behavioral Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/creational-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creational Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/structural-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structural Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/other-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ds-algo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds-algo/algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../qa/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    QA
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            QA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/cucumber/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/selenium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selenium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/protractor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protractor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/cypress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cypress
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/webdriverIO/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebdriverIO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apigee
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/mocha-chai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mocha/Chai
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/karate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    karate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/postman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    postman
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/rest-assured/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest Assured
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/testng/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestNG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/mobile/appium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/mobile/robot-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Robot Framework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/jmeter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JMeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Assessment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/java/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/spring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Node.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Project
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Project
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/company/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Company
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/banks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/healthcare/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/government/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Government & Public
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/healthcare/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/it-industry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IT industry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/retail/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Retail and E-commerce
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/telecommunication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telecommunication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agile methodology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Security Scan Tools
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Security Scan Tools
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#java-code-security-scanning-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java code security scanning tools
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Java code security scanning tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-findbugs-spotbugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. FindBugs (SpotBugs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sonarqube" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. SonarQube
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-checkmarx" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Checkmarx
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fortify" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Fortify
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-owasp-dependency-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. OWASP Dependency-Check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veracode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Veracode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Veracode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-static-analysis-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Static Analysis (SAST):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dynamic-analysis-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Dynamic Analysis (DAST):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-software-composition-analysis-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Software Composition Analysis (SCA):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-static-analysis-pipeline-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Static Analysis Pipeline Scan:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-comprehensive-reporting-and-remediation" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Comprehensive Reporting and Remediation:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-support-for-various-development-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Support for Various Development Environments:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-continuous-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Continuous Monitoring:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-integration-with-development-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Integration with Development Tools:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonarqube" class="md-nav__link">
+    <span class="md-ellipsis">
+      SonarQube
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SonarQube">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-static-code-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Static Code Analysis:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-code-quality-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Code Quality Metrics:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-security-vulnerability-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Security Vulnerability Scanning:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-code-duplication-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Code Duplication Detection:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-integration-with-development-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Integration with Development Tools:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-customizable-rules-and-quality-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Customizable Rules and Quality Profiles:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-plugin-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Plugin Ecosystem:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-sonarqube" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using SonarQube
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#java-code-security-scanning-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java code security scanning tools
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Java code security scanning tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-findbugs-spotbugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. FindBugs (SpotBugs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sonarqube" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. SonarQube
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-checkmarx" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Checkmarx
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fortify" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Fortify
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-owasp-dependency-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. OWASP Dependency-Check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veracode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Veracode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Veracode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-static-analysis-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Static Analysis (SAST):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dynamic-analysis-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Dynamic Analysis (DAST):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-software-composition-analysis-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Software Composition Analysis (SCA):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-static-analysis-pipeline-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Static Analysis Pipeline Scan:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-comprehensive-reporting-and-remediation" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Comprehensive Reporting and Remediation:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-support-for-various-development-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Support for Various Development Environments:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-continuous-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Continuous Monitoring:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-integration-with-development-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Integration with Development Tools:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonarqube" class="md-nav__link">
+    <span class="md-ellipsis">
+      SonarQube
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SonarQube">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-static-code-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Static Code Analysis:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-code-quality-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Code Quality Metrics:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-security-vulnerability-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Security Vulnerability Scanning:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-code-duplication-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Code Duplication Detection:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-integration-with-development-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Integration with Development Tools:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-customizable-rules-and-quality-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Customizable Rules and Quality Profiles:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-plugin-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Plugin Ecosystem:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-sonarqube" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using SonarQube
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="security-scanning-tools">Security Scanning Tools<a class="headerlink" href="#security-scanning-tools" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="java-code-security-scanning-tools">Java code security scanning tools<a class="headerlink" href="#java-code-security-scanning-tools" title="Permanent link">&para;</a></h2>
+<p>Java code security scanning tools are essential for identifying and mitigating vulnerabilities in Java applications. They help developers, students, and IT professionals ensure the safety and reliability of their code. This article explores popular Java code security scanning tools, their features, and how to use them effectively.</p>
+<p>Java is a widely used programming language, powering a vast array of applications, from web and mobile apps to enterprise systems. However, like any software, Java applications can have security vulnerabilities that may be exploited by attackers. To address this concern, developers and security professionals rely on Java code security scanning tools. These tools analyze Java code to identify and mitigate potential security risks, ensuring that applications remain robust and protected.</p>
+<h3 id="1-findbugs-spotbugs">1. <strong>FindBugs (SpotBugs)</strong><a class="headerlink" href="#1-findbugs-spotbugs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Description:</strong> FindBugs, now known as SpotBugs, is a widely used static analysis tool for Java. It detects common coding mistakes and potential vulnerabilities in Java source code.</li>
+<li><strong>Key Features:</strong> SpotBugs identifies issues such as null pointer dereferences, incorrect use of APIs, and other code anomalies.</li>
+<li><strong>Usage:</strong> SpotBugs can be integrated into popular IDEs (Integrated Development Environments) like Eclipse and IntelliJ IDEA, as well as build tools like Apache Maven.</li>
+</ul>
+<h3 id="2-sonarqube">2. <strong>SonarQube</strong><a class="headerlink" href="#2-sonarqube" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Description:</strong> SonarQube is an open-source platform that offers code quality and security analysis for Java and other programming languages.</li>
+<li><strong>Key Features:</strong> SonarQube provides comprehensive code quality reports and security vulnerability detection. It supports a wide range of plugins for additional functionality.</li>
+<li><strong>Usage:</strong> Users can run SonarQube locally or as a part of a continuous integration (CI) pipeline to automatically analyze code quality and security during development.</li>
+</ul>
+<h3 id="3-checkmarx">3. <strong>Checkmarx</strong><a class="headerlink" href="#3-checkmarx" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Description:</strong> Checkmarx is a commercial static application security testing (SAST) tool that supports Java and various other languages.</li>
+<li><strong>Key Features:</strong> Checkmarx offers advanced scanning capabilities to identify security vulnerabilities, including SQL injection, cross-site scripting (XSS), and more.</li>
+<li><strong>Usage:</strong> Checkmarx is often integrated into the development workflow to scan code at various stages of development, including code commits and builds.</li>
+</ul>
+<h3 id="4-fortify">4. <strong>Fortify</strong><a class="headerlink" href="#4-fortify" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Description:</strong> Fortify by Micro Focus is an enterprise-grade application security platform that includes static code analysis for Java.</li>
+<li><strong>Key Features:</strong> Fortify provides in-depth analysis and prioritization of vulnerabilities, helping organizations focus on critical issues first.</li>
+<li><strong>Usage:</strong> Fortify is typically used in large enterprises and organizations with complex codebases to maintain security standards.</li>
+</ul>
+<h3 id="5-owasp-dependency-check">5. <strong>OWASP Dependency-Check</strong><a class="headerlink" href="#5-owasp-dependency-check" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Description:</strong> OWASP Dependency-Check is an open-source tool that focuses on identifying known vulnerabilities in Java dependencies (libraries).</li>
+<li><strong>Key Features:</strong> It scans project dependencies to check for published vulnerabilities in open-source libraries.</li>
+<li><strong>Usage:</strong> Developers use OWASP Dependency-Check to ensure that their applications do not include vulnerable third-party libraries.</li>
+</ul>
+<hr />
+<p>Veracode is a well-known application security testing (AST) platform that helps organizations identify and remediate security vulnerabilities in their software applications. It offers a range of services and tools designed to assess and improve the security of applications throughout the development lifecycle. Below, I provide details about Veracode and its key features:</p>
+<h2 id="veracode">Veracode<a class="headerlink" href="#veracode" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>Description:</strong> Veracode is a cloud-based application security platform that provides static analysis, dynamic analysis, and software composition analysis (SCA) to help organizations secure their software applications.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+</li>
+</ul>
+<h3 id="1-static-analysis-sast">1. Static Analysis (SAST):<a class="headerlink" href="#1-static-analysis-sast" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> Static analysis, also known as Static Application Security Testing, involves scanning the source code or binary code of an application without executing it.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Identifies vulnerabilities in the source code, including common coding mistakes and security flaws.</li>
+<li>Provides a detailed analysis of code, including specific lines and methods where vulnerabilities are found.</li>
+<li>Supports a wide range of programming languages, including Java, C/C++, .NET, and more.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-dynamic-analysis-dast">2. Dynamic Analysis (DAST):<a class="headerlink" href="#2-dynamic-analysis-dast" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> Dynamic analysis, or Dynamic Application Security Testing, involves testing a running application to identify vulnerabilities that may not be apparent in the source code.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Scans applications in their runtime environment, simulating real-world attack scenarios.</li>
+<li>Detects security flaws that can be exploited when the application is interacting with external systems.</li>
+<li>Provides results in the context of the application's behavior during the scan.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-software-composition-analysis-sca">3. Software Composition Analysis (SCA):<a class="headerlink" href="#3-software-composition-analysis-sca" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SCA focuses on identifying security vulnerabilities in open-source components and libraries used in an application.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Scans application dependencies to detect known vulnerabilities in open-source components.</li>
+<li>Offers insights into the severity and impact of identified vulnerabilities.</li>
+<li>Helps organizations track and manage open-source software risks.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-static-analysis-pipeline-scan">4. Static Analysis Pipeline Scan:<a class="headerlink" href="#4-static-analysis-pipeline-scan" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> This feature enables organizations to integrate static analysis into their continuous integration and continuous delivery (CI/CD) pipelines.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Scans code automatically as part of the development pipeline.</li>
+<li>Provides fast feedback to developers, allowing them to address issues early in the development process.</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-comprehensive-reporting-and-remediation">5. Comprehensive Reporting and Remediation:<a class="headerlink" href="#5-comprehensive-reporting-and-remediation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> Veracode offers comprehensive reporting capabilities to help organizations understand their application security posture.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Generates detailed reports with vulnerability findings, risk assessments, and remediation guidance.</li>
+<li>Provides guidance on how to fix identified vulnerabilities.</li>
+<li>Supports collaboration between security teams and developers for efficient issue resolution.</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-support-for-various-development-environments">6. Support for Various Development Environments:<a class="headerlink" href="#6-support-for-various-development-environments" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> Veracode supports a wide range of development environments, including web applications, mobile apps, and APIs.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Scans applications developed using different programming languages and frameworks.</li>
+<li>Ensures that security assessments are applicable to diverse application types.</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-continuous-monitoring">7. Continuous Monitoring:<a class="headerlink" href="#7-continuous-monitoring" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> Veracode offers continuous monitoring capabilities to help organizations keep track of their application security over time.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Monitors applications for new vulnerabilities and risks.</li>
+<li>Provides insights into the evolving threat landscape.</li>
+<li>Supports ongoing security improvements.</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-integration-with-development-tools">8. Integration with Development Tools:<a class="headerlink" href="#8-integration-with-development-tools" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> Veracode integrates seamlessly with various development and DevOps tools, enabling organizations to incorporate security into their existing workflows.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Integrates with popular IDEs, CI/CD tools, and issue tracking systems.</li>
+<li>Provides actionable security feedback to developers within their preferred development environments.</li>
+</ul>
+</li>
+<li>
+<p><strong>Deployment:</strong> Veracode is offered as a cloud-based service, making it easily accessible to organizations without the need for on-premises infrastructure.</p>
+</li>
+<li>
+<p><strong>Licensing:</strong> Veracode typically offers subscription-based licensing models, with pricing based on factors such as the number of applications scanned, the scan frequency, and the level of analysis required.</p>
+</li>
+<li>
+<p><strong>Customer Base:</strong> Veracode serves a wide range of customers, including enterprises, software development companies, financial institutions, healthcare organizations, and government agencies.</p>
+</li>
+<li>
+<p><strong>Certifications:</strong> Veracode has received certifications and compliances that attest to its commitment to security and quality, including SOC 2 Type II, ISO 27001, and FedRAMP.</p>
+</li>
+<li>
+<p><strong>Support and Training:</strong> Veracode provides customer support, training resources, and educational materials to help users get the most out of their platform.</p>
+</li>
+</ul>
+<p>Veracode is widely recognized in the field of application security testing, offering a comprehensive suite of tools and services to help organizations identify and address security vulnerabilities in their software applications, ultimately improving their security posture.</p>
+<p>Java code security scanning tools are invaluable for identifying and addressing vulnerabilities in Java applications. Whether you're a student, developer, or IT professional, integrating these tools into your workflow helps ensure that your Java projects remain secure and resilient in the face of evolving security threats. Explore the options, select the right tool for your needs, and make security a fundamental part of your software development process.</p>
+<hr />
+<h2 id="sonarqube">SonarQube<a class="headerlink" href="#sonarqube" title="Permanent link">&para;</a></h2>
+<p>SonarQube is an open-source platform for continuous code quality assessment and static code analysis. It helps developers, students, and organizations improve the quality, maintainability, and security of their software projects. This article delves into the details of SonarQube, its features, and how it can benefit software development processes.</p>
+<p>SonarQube, formerly known as Sonar, is an open-source platform designed to assess and enhance the quality of software code. It provides static code analysis, code coverage, code duplication detection, and security vulnerability scanning. SonarQube integrates seamlessly into the software development lifecycle, allowing developers to identify issues early, maintain code quality, and adhere to coding standards.</p>
+<h3 id="1-static-code-analysis">1. <strong>Static Code Analysis:</strong><a class="headerlink" href="#1-static-code-analysis" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SonarQube performs static code analysis to identify a wide range of code quality issues and vulnerabilities in source code, including programming bugs, code smells, and security vulnerabilities.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Supports various programming languages, including Java, JavaScript, Python, C#, and more.</li>
+<li>Provides detailed code quality reports with issues categorized by severity and type.</li>
+<li>Offers automated code review and feedback to developers within their development environment.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-code-quality-metrics">2. <strong>Code Quality Metrics:</strong><a class="headerlink" href="#2-code-quality-metrics" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SonarQube collects and displays code quality metrics, allowing teams to track the evolution of their codebase's health over time.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Measures code complexity, maintainability, reliability, and security.</li>
+<li>Generates visualizations, charts, and graphs to visualize code quality trends.</li>
+<li>Helps prioritize technical debt and improvement efforts.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-security-vulnerability-scanning">3. <strong>Security Vulnerability Scanning:</strong><a class="headerlink" href="#3-security-vulnerability-scanning" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SonarQube includes security analysis rules to identify security vulnerabilities and coding practices that could lead to security issues.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Detects security vulnerabilities such as SQL injection, cross-site scripting (XSS), and insecure configurations.</li>
+<li>Provides guidance on remediation and secure coding practices.</li>
+<li>Supports compliance with security standards and regulations.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-code-duplication-detection">4. <strong>Code Duplication Detection:</strong><a class="headerlink" href="#4-code-duplication-detection" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SonarQube identifies duplicate code blocks within a project, helping reduce redundancy and improving code maintainability.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Flags duplicated code snippets and highlights potential refactoring opportunities.</li>
+<li>Supports code consolidation and refactoring efforts.</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-integration-with-development-tools">5. <strong>Integration with Development Tools:</strong><a class="headerlink" href="#5-integration-with-development-tools" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SonarQube integrates seamlessly with various development tools, allowing developers to receive code quality feedback within their preferred environments.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Integrates with popular IDEs, CI/CD pipelines, and version control systems like Jenkins, Git, and Azure DevOps.</li>
+<li>Provides real-time analysis and feedback during development.</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-customizable-rules-and-quality-profiles">6. <strong>Customizable Rules and Quality Profiles:</strong><a class="headerlink" href="#6-customizable-rules-and-quality-profiles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SonarQube allows users to define custom coding rules and quality profiles tailored to their project's requirements.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Customize coding standards and quality criteria to align with organizational guidelines.</li>
+<li>Fine-tune analysis settings for specific projects or codebases.</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-plugin-ecosystem">7. <strong>Plugin Ecosystem:</strong><a class="headerlink" href="#7-plugin-ecosystem" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Description:</strong> SonarQube supports a rich ecosystem of plugins that extend its functionality for different programming languages, frameworks, and additional features.</p>
+</li>
+<li>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Access a wide range of plugins for language support, custom rules, and third-party integrations.</li>
+<li>Enhance the platform's capabilities based on project needs.</li>
+</ul>
+</li>
+</ul>
+<h3 id="using-sonarqube">Using SonarQube<a class="headerlink" href="#using-sonarqube" title="Permanent link">&para;</a></h3>
+<p>To make the most of SonarQube:</p>
+<ol>
+<li>
+<p><strong>Install and Configure:</strong> Install SonarQube and configure it for your development environment.</p>
+</li>
+<li>
+<p><strong>Integrate into Workflow:</strong> Integrate SonarQube into your CI/CD pipelines, version control systems, and development IDEs.</p>
+</li>
+<li>
+<p><strong>Analyze Code:</strong> Run code analysis regularly to detect code quality issues, vulnerabilities, and duplications.</p>
+</li>
+<li>
+<p><strong>Review and Remediate:</strong> Review analysis reports, prioritize issues, and work on code improvements and security fixes.</p>
+</li>
+<li>
+<p><strong>Track Progress:</strong> Monitor code quality metrics and security vulnerabilities over time to measure progress and identify areas for improvement.</p>
+</li>
+<li>
+<p><strong>Customize Rules:</strong> Tailor coding rules and quality profiles to match your project's requirements.</p>
+</li>
+<li>
+<p><strong>Collaborate:</strong> Foster collaboration between developers, testers, and other stakeholders to address code quality and security issues effectively.</p>
+</li>
+</ol>
+<p>SonarQube is a powerful tool for improving code quality, maintainability, and security in software development projects. Whether you're a student, developer, or part of an organization, SonarQube can help you build robust, secure, and maintainable software by providing automated code analysis and valuable insights. Embrace SonarQube as an integral part of your software development process to enhance the quality and reliability of your codebase.</p>
+<hr />
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.highlight", "navigation.path", "navigation.top", "content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", {"palette": [{"media": "(prefers-color-scheme)", "toggle": {"icon": "material/link", "name": "Switch to light mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: light)", "primary": "indigo", "scheme": "default", "toggle": {"icon": "material/toggle-switch", "name": "Switch to dark mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: dark)", "primary": "black", "scheme": "slate", "toggle": {"icon": "material/toggle-switch-off", "name": "Switch to system preference"}}]}], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.caa56a14.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tablesort.js"></script>
+      
+    
+  </body>
+</html>

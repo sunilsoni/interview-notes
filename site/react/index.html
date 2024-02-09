@@ -1,0 +1,4379 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://interview-docs.com/react/">
+      
+      
+        <link rel="prev" href="../angular/typescript/">
+      
+      
+        <link rel="next" href="lifecycle/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.7">
+    
+    
+      
+        <title>React - Interview Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#react" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Interview Docs" class="md-header__button md-logo" aria-label="Interview Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Interview Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              React
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../java/" class="md-tabs__link">
+          
+  
+    
+  
+  Languages
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../spring/" class="md-tabs__link">
+          
+  
+    
+  
+  Web Development
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../mq/kafka/" class="md-tabs__link">
+          
+  
+    
+  
+  MQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../devops/" class="md-tabs__link">
+          
+  
+    
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../db/" class="md-tabs__link">
+          
+  
+    
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+    
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../design-pattern/" class="md-tabs__link">
+          
+  
+    
+  
+  Design Pattern
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ds-algo/" class="md-tabs__link">
+          
+  
+    
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../qa/" class="md-tabs__link">
+          
+  
+    
+  
+  QA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../assessment/angular/" class="md-tabs__link">
+          
+  
+    
+  
+  Assessment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../projects/company/" class="md-tabs__link">
+          
+  
+    
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../misc/agile/" class="md-tabs__link">
+          
+  
+    
+  
+  Misc
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Interview Docs" class="md-nav__button md-logo" aria-label="Interview Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Interview Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Languages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Languages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../java/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/java8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 8
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/java17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../nodejs/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Node.js
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Node.js
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodejs/express/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Express.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../python/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../golang/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Golang
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Golang
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Web Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Web Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../spring/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/security/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/spring-boot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/spring-mvc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring MVC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../microservices/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Microservices
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Microservices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../microservices/solid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SOLID
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../angular/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Angular
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Angular
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../angular/typescript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            React
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lifecycle Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="enzyme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enzyme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="eslint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESLint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="react-router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Router
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="redux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    MQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/kafka/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache Kafka
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/rebbitmq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/activemq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache ActiveMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/sqs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Amazon SQS (Simple Queue Service)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/servicebus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microsoft Azure sqs.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/pubsub/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Cloud Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../devops/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            DevOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/aws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/azure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/gcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/openshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenShift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/vcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VCS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization and Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/iac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure as Code (IaC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Monitoring and Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Container Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/scanning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scanning and Compliance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/artifact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifact Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/gitops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../db/" class="md-nav__link ">
+              
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/cassandra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cassandra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/couchbase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Couchbase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/dynamoDB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DynamoDB.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/mongodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MongoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/oracle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Oracle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/postgreSql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PostgreSql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../design-pattern/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Design Pattern
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Design Pattern
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/behavioral-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Behavioral Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/creational-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creational Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/structural-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structural Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/other-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../ds-algo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ds-algo/algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../qa/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    QA
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            QA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/cucumber/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/selenium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selenium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/protractor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protractor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/cypress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cypress
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/webdriverIO/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebdriverIO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apigee
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/mocha-chai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mocha/Chai
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/karate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    karate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/postman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    postman
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/rest-assured/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest Assured
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/testng/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestNG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/mobile/appium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/mobile/robot-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Robot Framework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/jmeter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JMeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Assessment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment/java/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment/spring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Node.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment/python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Project
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Project
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/company/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Company
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/banks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/healthcare/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/government/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Government & Public
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/healthcare/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/it-industry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IT industry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/retail/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Retail and E-commerce
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/telecommunication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telecommunication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../misc/agile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agile methodology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../misc/security-scan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scan Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#react_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      React
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="React">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-component-based-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Component-Based Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-virtual-dom-document-object-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Virtual DOM (Document Object Model)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-declarative-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Declarative Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-component-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Component Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-jsx-javascript-xml" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. JSX (JavaScript XML)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-unidirectional-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Unidirectional Data Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-react-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. React Native
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-large-and-active-community" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Large and Active Community
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-one-way-data-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. One-Way Data Binding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-react-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. React Ecosystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-developer-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Developer Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-community-and-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Community and Resources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-integration-with-other-technologies" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Integration with Other Technologies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Performance Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-testing-and-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      15. Testing and Debugging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-server-side-rendering-ssr" class="md-nav__link">
+    <span class="md-ellipsis">
+      16. Server-Side Rendering (SSR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-accessibility-a11y-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      17. Accessibility (a11y) Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-code-reusability" class="md-nav__link">
+    <span class="md-ellipsis">
+      18. Code Reusability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-strong-developer-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      19. Strong Developer Tooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20-progressive-web-app-pwa-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      20. Progressive Web App (PWA) Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual DOM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Virtual DOM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-does-it-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      How does it work?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advantages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Performance Optimization:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cross-platform-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Cross-Platform Compatibility:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-developer-friendly" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Developer-Friendly:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virtual-dom-reconciliation-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual DOM Reconciliation Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#react-reconciliation-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      React Reconciliation Strategies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="React Reconciliation Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-key-prop" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Key Prop:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-batched-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Batched Updates:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-component-lifecycle-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Component Lifecycle Methods:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virtual-dom-vs-actual-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual DOM vs. Actual DOM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Virtual DOM vs. Actual DOM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actual-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actual DOM:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virtual-dom_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual DOM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reacts-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      React's Philosophy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases-for-the-virtual-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases for the Virtual DOM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Cases for the Virtual DOM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-complex-user-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Complex User Interfaces:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-real-time-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Real-Time Applications:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cross-platform-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Cross-Platform Development:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#props-vs-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Props vs State
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Props vs State">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#props" class="md-nav__link">
+    <span class="md-ellipsis">
+      Props
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state" class="md-nav__link">
+    <span class="md-ellipsis">
+      State
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differences-between-props-and-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Differences Between Props and State
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Differences Between Props and State">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-practices-for-props" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices for Props:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices-for-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices for State:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-choose-props-vs-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Choose Props vs. State:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="react">React<a class="headerlink" href="#react" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="react_1">React<a class="headerlink" href="#react_1" title="Permanent link">&para;</a></h2>
+<p>React is a popular JavaScript library primarily used for building user interfaces. It was developed by Facebook and is widely adopted in the web development community. In this article, we'll delve into the main features of React, making it easy for students, developers, and others to grasp its essence.</p>
+<p>React offers several powerful features that make it a preferred choice for developing dynamic and interactive web applications:</p>
+<h4 id="1-component-based-architecture">1. Component-Based Architecture<a class="headerlink" href="#1-component-based-architecture" title="Permanent link">&para;</a></h4>
+<p>React is centered around a component-based architecture, where the user interface is divided into reusable and self-contained components. This modular approach simplifies development, encourages code reusability, and facilitates collaboration among developers.</p>
+<h4 id="2-virtual-dom-document-object-model">2. Virtual DOM (Document Object Model)<a class="headerlink" href="#2-virtual-dom-document-object-model" title="Permanent link">&para;</a></h4>
+<p>One of React's standout features is the Virtual DOM. Instead of directly manipulating the browser's DOM, React creates a virtual representation of it in memory. When changes occur in the application's state, React calculates the most efficient way to update the virtual DOM, minimizing actual DOM manipulations. This leads to improved performance and a smoother user experience.</p>
+<h4 id="3-declarative-syntax">3. Declarative Syntax<a class="headerlink" href="#3-declarative-syntax" title="Permanent link">&para;</a></h4>
+<p>React uses a declarative syntax, which means developers specify what the UI should look like based on the application's state, rather than writing imperative code to update the UI. This makes the code more intuitive, easier to understand, and less error-prone.</p>
+<h4 id="4-component-lifecycle">4. Component Lifecycle<a class="headerlink" href="#4-component-lifecycle" title="Permanent link">&para;</a></h4>
+<p>React components have a well-defined lifecycle with methods that allow developers to control behavior at different stages, such as component creation, updates, and unmounting. This fine-grained control is valuable for managing side effects, data fetching, and optimizing performance.</p>
+<h4 id="5-jsx-javascript-xml">5. JSX (JavaScript XML)<a class="headerlink" href="#5-jsx-javascript-xml" title="Permanent link">&para;</a></h4>
+<p>React introduces JSX, a syntax extension that allows developers to write HTML-like code within JavaScript. This combination simplifies the creation of UI components by providing a more natural and expressive way to define the structure and appearance of the interface.</p>
+<h4 id="6-unidirectional-data-flow">6. Unidirectional Data Flow<a class="headerlink" href="#6-unidirectional-data-flow" title="Permanent link">&para;</a></h4>
+<p>React follows a unidirectional data flow, where data flows in a single direction, typically from parent to child components. This clear data flow pattern enhances predictability and simplifies debugging, making it easier to maintain complex applications.</p>
+<h4 id="7-react-native">7. React Native<a class="headerlink" href="#7-react-native" title="Permanent link">&para;</a></h4>
+<p>React's versatility extends beyond web development. React Native is a framework built on top of React that enables the development of mobile applications for both iOS and Android using the same codebase. This allows developers to leverage their React skills to build native mobile apps.</p>
+<h4 id="8-large-and-active-community">8. Large and Active Community<a class="headerlink" href="#8-large-and-active-community" title="Permanent link">&para;</a></h4>
+<p>React boasts a large and vibrant community of developers and libraries. This means that developers have access to a wealth of resources, third-party packages, and support, making it easier to solve problems and stay up-to-date with best practices.</p>
+<p>In conclusion, React's component-based architecture, Virtual DOM, declarative syntax, and other features make it a powerful tool for building efficient and maintainable user interfaces. Whether you're a student learning web development or an experienced developer, React is a valuable skill to acquire for modern web application development.</p>
+<h3 id="9-one-way-data-binding">9. One-Way Data Binding<a class="headerlink" href="#9-one-way-data-binding" title="Permanent link">&para;</a></h3>
+<p>React enforces a one-way data binding mechanism, ensuring that data flows in a predictable manner. This prevents unexpected side effects and helps maintain a clear data flow, especially in complex applications.</p>
+<h3 id="10-react-ecosystem">10. React Ecosystem<a class="headerlink" href="#10-react-ecosystem" title="Permanent link">&para;</a></h3>
+<p>React is not just a standalone library; it has a rich ecosystem of tools and libraries that complement its capabilities. Tools like Redux for state management, React Router for routing, and Axios for data fetching seamlessly integrate with React, enhancing its functionality and extending its capabilities.</p>
+<h3 id="11-developer-tools">11. Developer Tools<a class="headerlink" href="#11-developer-tools" title="Permanent link">&para;</a></h3>
+<p>React provides robust developer tools, such as React DevTools and React Profiler, which assist developers in debugging and profiling their applications. These tools make it easier to identify performance bottlenecks, inspect component hierarchies, and trace data flow.</p>
+<h3 id="12-community-and-resources">12. Community and Resources<a class="headerlink" href="#12-community-and-resources" title="Permanent link">&para;</a></h3>
+<p>React has a thriving online community where developers can seek help, share knowledge, and collaborate on projects. Countless tutorials, documentation, and online courses are available to help individuals learn React effectively, making it accessible to a wide range of skill levels.</p>
+<h3 id="13-integration-with-other-technologies">13. Integration with Other Technologies<a class="headerlink" href="#13-integration-with-other-technologies" title="Permanent link">&para;</a></h3>
+<p>React can be seamlessly integrated with other technologies and frameworks, such as GraphQL for efficient data querying, and server-side rendering for improved SEO and initial page load times. This flexibility allows developers to build versatile and high-performance applications.</p>
+<h3 id="14-performance-optimization">14. Performance Optimization<a class="headerlink" href="#14-performance-optimization" title="Permanent link">&para;</a></h3>
+<p>React's Virtual DOM and efficient rendering mechanism contribute to exceptional performance. With the ability to update only the parts of the UI that have changed, React minimizes unnecessary re-rendering and optimizes the application's speed and responsiveness.</p>
+<h3 id="15-testing-and-debugging">15. Testing and Debugging<a class="headerlink" href="#15-testing-and-debugging" title="Permanent link">&para;</a></h3>
+<p>React encourages the use of testing frameworks like Jest and Enzyme, which facilitate unit testing and component testing. This built-in support for testing makes it easier to identify and fix issues, ensuring that your application remains robust and bug-free.</p>
+<h3 id="16-server-side-rendering-ssr">16. Server-Side Rendering (SSR)<a class="headerlink" href="#16-server-side-rendering-ssr" title="Permanent link">&para;</a></h3>
+<p>React supports server-side rendering, allowing you to render your components on the server and send a fully rendered HTML page to the client. SSR improves SEO, initial page load times, and the user experience, particularly for content-heavy websites.</p>
+<h3 id="17-accessibility-a11y-support">17. Accessibility (a11y) Support<a class="headerlink" href="#17-accessibility-a11y-support" title="Permanent link">&para;</a></h3>
+<p>React emphasizes accessibility, making it easier to create web applications that are usable by people with disabilities. A wide range of accessibility-friendly libraries and tools are available to assist developers in ensuring their applications are inclusive and compliant with accessibility standards.</p>
+<h3 id="18-code-reusability">18. Code Reusability<a class="headerlink" href="#18-code-reusability" title="Permanent link">&para;</a></h3>
+<p>With React's component-based architecture and the ability to create custom components, you can achieve high levels of code reusability. Reusing components across different parts of your application or even in entirely different projects can significantly reduce development time and maintenance efforts.</p>
+<h3 id="19-strong-developer-tooling">19. Strong Developer Tooling<a class="headerlink" href="#19-strong-developer-tooling" title="Permanent link">&para;</a></h3>
+<p>React benefits from a robust set of developer tools that enable you to inspect component hierarchies, track component state, and monitor performance. These tools are invaluable for debugging and optimizing React applications during development and beyond.</p>
+<h3 id="20-progressive-web-app-pwa-support">20. Progressive Web App (PWA) Support<a class="headerlink" href="#20-progressive-web-app-pwa-support" title="Permanent link">&para;</a></h3>
+<p>React can be used to build Progressive Web Apps (PWAs), which are web applications that offer a native app-like experience, including offline capabilities, push notifications, and smooth performance. This extends the reach of your web applications to various platforms and devices.</p>
+<p>In conclusion, React's expansive feature set, coupled with its focus on performance, testing, accessibility, and code reusability, positions it as a top choice for developing modern web and mobile applications. Whether you're a student, a developer looking to enhance your skills, or someone interested in creating user-friendly and efficient applications, React provides the tools and resources to help you succeed in your endeavors.</p>
+<hr />
+<h2 id="virtual-dom">Virtual DOM<a class="headerlink" href="#virtual-dom" title="Permanent link">&para;</a></h2>
+<p>The Virtual DOM (VDOM) is a fundamental concept in React, a popular JavaScript library for building user interfaces. It plays a crucial role in enhancing the performance and efficiency of web applications by minimizing unnecessary updates to the actual DOM (Document Object Model).</p>
+<p>The Virtual DOM is a lightweight, in-memory representation of the real DOM. In a React application, instead of directly manipulating the actual DOM elements when changes occur, React creates and uses a Virtual DOM to keep track of the desired UI state. This Virtual DOM is a tree-like structure of JavaScript objects that mirrors the structure of the actual UI.</p>
+<h3 id="how-does-it-work">How does it work?<a class="headerlink" href="#how-does-it-work" title="Permanent link">&para;</a></h3>
+<p>When you make changes to your React component's state or props, React doesn't immediately update the real DOM. Instead, it goes through a process known as reconciliation, which involves comparing the current Virtual DOM with the previous one.</p>
+<ol>
+<li>
+<p><strong>Rendering the Virtual DOM:</strong> When you initially render a React component, it creates a Virtual DOM representation of your UI.</p>
+</li>
+<li>
+<p><strong>Updating the Virtual DOM:</strong> When changes occur, React constructs a new Virtual DOM tree to represent the updated state.</p>
+</li>
+<li>
+<p><strong>Reconciliation:</strong> React efficiently compares the new Virtual DOM with the previous one. It identifies the differences (called "diffing") between the two trees.</p>
+</li>
+<li>
+<p><strong>Re-rendering:</strong> Only the specific parts of the Virtual DOM that have changed are updated in the actual DOM. This selective update process minimizes the need for costly and time-consuming direct DOM manipulation.</p>
+</li>
+</ol>
+<h3 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h3>
+<p>The Virtual DOM provides several advantages:</p>
+<h4 id="1-performance-optimization">1. Performance Optimization:<a class="headerlink" href="#1-performance-optimization" title="Permanent link">&para;</a></h4>
+<p>By reducing the number of actual DOM updates, React significantly improves the performance of web applications. Since modifying the real DOM is a slow operation, the Virtual DOM's ability to batch changes and update only what's necessary results in faster rendering.</p>
+<h4 id="2-cross-platform-compatibility">2. Cross-Platform Compatibility:<a class="headerlink" href="#2-cross-platform-compatibility" title="Permanent link">&para;</a></h4>
+<p>React's Virtual DOM abstraction makes it easier to support multiple platforms and environments. Whether your app runs in a web browser, on mobile devices, or even on the server (using Node.js), the Virtual DOM ensures a consistent development model.</p>
+<h4 id="3-developer-friendly">3. Developer-Friendly:<a class="headerlink" href="#3-developer-friendly" title="Permanent link">&para;</a></h4>
+<p>React's use of the Virtual DOM simplifies the development process. Developers can focus on describing how the UI should look in different states, and React takes care of efficiently updating the DOM.</p>
+<p>Let's see a simple example of how the Virtual DOM works in React:</p>
+<div class="language-jsx highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">useState</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;docs/react/index&#39;</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">function</span><span class="w"> </span><span class="nx">Counter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">count</span><span class="p">,</span><span class="w"> </span><span class="nx">setCount</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">            </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Count</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">count</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">            </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}&gt;</span><span class="nx">Increment</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">);</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Counter</span><span class="p">;</span>
+</span></code></pre></div>
+<p>In this example, when the button is clicked, React updates the Virtual DOM and then only modifies the part of the actual DOM displaying the count value, resulting in a smooth and efficient user experience.</p>
+<h3 id="virtual-dom-reconciliation-process">Virtual DOM Reconciliation Process<a class="headerlink" href="#virtual-dom-reconciliation-process" title="Permanent link">&para;</a></h3>
+<p>To provide a more detailed understanding, let's dive deeper into the Virtual DOM reconciliation process with an example:</p>
+<p>Suppose you have a list of items in your React component, and you want to update one item's text when a button is clicked:</p>
+<div class="language-jsx highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">useState</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;docs/react/index&#39;</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">function</span><span class="w"> </span><span class="nx">ItemList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="nx">setItems</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">([</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="p">{</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Item 1&#39;</span><span class="p">},</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="p">{</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Item 2&#39;</span><span class="p">},</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="p">{</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Item 3&#39;</span><span class="p">},</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">]);</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleUpdate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">updatedItems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">items</span><span class="p">];</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="nx">updatedItems</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Updated Item 2&#39;</span><span class="p">;</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="nx">setItems</span><span class="p">(</span><span class="nx">updatedItems</span><span class="p">);</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">            </span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">                </span><span class="p">{</span><span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">                    </span><span class="p">&lt;</span><span class="nt">li</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">}&gt;{</span><span class="nx">item</span><span class="p">.</span><span class="nx">text</span><span class="p">}&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">                </span><span class="p">))}</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">            </span><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">            </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleUpdate</span><span class="p">}&gt;</span><span class="nx">Update</span><span class="w"> </span><span class="nx">Item</span><span class="w"> </span><span class="mf">2</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">        </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="p">);</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="p">}</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">ItemList</span><span class="p">;</span>
+</span></code></pre></div>
+<p>When you click the "Update Item 2" button, React performs the following steps:</p>
+<ol>
+<li>
+<p>It updates the Virtual DOM with the new state of the <code>items</code> array.</p>
+</li>
+<li>
+<p>It compares the new Virtual DOM with the previous one, identifying that only one <code>&lt;li&gt;</code> element text has changed.</p>
+</li>
+<li>
+<p>Instead of re-rendering the entire list, React intelligently updates only the specific <code>&lt;li&gt;</code> element whose text has changed in the real DOM.</p>
+</li>
+</ol>
+<p>This process minimizes unnecessary DOM manipulations and results in faster and more efficient updates.</p>
+<h3 id="react-reconciliation-strategies">React Reconciliation Strategies<a class="headerlink" href="#react-reconciliation-strategies" title="Permanent link">&para;</a></h3>
+<p>React uses several strategies during reconciliation to optimize updates further:</p>
+<h4 id="1-key-prop">1. Key Prop:<a class="headerlink" href="#1-key-prop" title="Permanent link">&para;</a></h4>
+<p>In the example above, you may have noticed the <code>key</code> prop in the <code>&lt;li&gt;</code> elements. Keys help React identify which items have changed, moved, or been added or removed in lists. Providing unique keys to each element helps React efficiently update the Virtual DOM.</p>
+<h4 id="2-batched-updates">2. Batched Updates:<a class="headerlink" href="#2-batched-updates" title="Permanent link">&para;</a></h4>
+<p>React batches multiple state updates and Virtual DOM comparisons into a single pass, reducing the number of times the reconciliation process occurs. This batched approach enhances performance.</p>
+<h4 id="3-component-lifecycle-methods">3. Component Lifecycle Methods:<a class="headerlink" href="#3-component-lifecycle-methods" title="Permanent link">&para;</a></h4>
+<p>React provides lifecycle methods like <code>shouldComponentUpdate</code> and <code>PureComponent</code> that allow you to control when a component should or should not update, preventing unnecessary rendering.</p>
+<p>The Virtual DOM is a powerful concept in React, optimizing the way user interfaces are built and updated. By using a Virtual DOM representation and a smart reconciliation process, React ensures that changes are made efficiently, resulting in high-performance web applications.</p>
+<h3 id="virtual-dom-vs-actual-dom">Virtual DOM vs. Actual DOM<a class="headerlink" href="#virtual-dom-vs-actual-dom" title="Permanent link">&para;</a></h3>
+<p>Let's compare the Virtual DOM to the Actual DOM to highlight the benefits of using a Virtual DOM:</p>
+<h4 id="actual-dom">Actual DOM:<a class="headerlink" href="#actual-dom" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The Actual DOM is the real representation of a web page's structure.</li>
+<li>Whenever there's a change in the data or state, the Actual DOM is directly updated, leading to potentially slow and inefficient operations, especially for complex web applications.</li>
+<li>Frequent updates to the Actual DOM can cause performance bottlenecks and a poor user experience.</li>
+</ul>
+<h4 id="virtual-dom_1">Virtual DOM:<a class="headerlink" href="#virtual-dom_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The Virtual DOM is a lightweight copy of the Actual DOM.</li>
+<li>React updates the Virtual DOM instead of the Actual DOM when there are changes in the application's data or state.</li>
+<li>The Virtual DOM allows React to batch multiple updates and perform a single, optimized update to the Actual DOM, reducing the rendering time and improving performance.</li>
+</ul>
+<h3 id="reacts-philosophy">React's Philosophy<a class="headerlink" href="#reacts-philosophy" title="Permanent link">&para;</a></h3>
+<p>React's philosophy is to make the development process more predictable and developer-friendly while ensuring high-performance user interfaces. The Virtual DOM aligns with these principles by abstracting away the complexities of direct DOM manipulation and providing a structured, efficient way to update the UI.</p>
+<h3 id="use-cases-for-the-virtual-dom">Use Cases for the Virtual DOM<a class="headerlink" href="#use-cases-for-the-virtual-dom" title="Permanent link">&para;</a></h3>
+<p>Understanding when and why to use the Virtual DOM is crucial:</p>
+<h4 id="1-complex-user-interfaces">1. Complex User Interfaces:<a class="headerlink" href="#1-complex-user-interfaces" title="Permanent link">&para;</a></h4>
+<p>When building applications with a complex user interface that frequently changes, React's Virtual DOM shines. It minimizes the performance impact of frequent updates.</p>
+<h4 id="2-real-time-applications">2. Real-Time Applications:<a class="headerlink" href="#2-real-time-applications" title="Permanent link">&para;</a></h4>
+<p>Real-time applications like chat applications, stock market dashboards, or online gaming benefit from the Virtual DOM's ability to handle rapid data changes and updates.</p>
+<h4 id="3-cross-platform-development">3. Cross-Platform Development:<a class="headerlink" href="#3-cross-platform-development" title="Permanent link">&para;</a></h4>
+<p>If you plan to develop for multiple platforms (web, mobile, desktop) using technologies like React Native, React's Virtual DOM abstraction ensures consistency and ease of development across platforms.</p>
+<p>In summary, the Virtual DOM is a crucial concept in React that enhances the performance and developer experience when building web applications. By providing a structured approach to updating the UI and minimizing direct DOM manipulations, React ensures that your applications are both efficient and maintainable.</p>
+<hr />
+<h2 id="props-vs-state">Props vs State<a class="headerlink" href="#props-vs-state" title="Permanent link">&para;</a></h2>
+<p>In React, props and state are fundamental concepts for managing and passing data within your components. Props are used to pass data from parent to child components, while state is used for managing a component's internal data and reactivity. Understanding the difference between them is crucial for building effective and maintainable React applications.</p>
+<h3 id="props">Props<a class="headerlink" href="#props" title="Permanent link">&para;</a></h3>
+<p>Props, short for "properties," are a way to pass data from a parent component to a child component in React. They are read-only and help in making your components reusable. Here's a breakdown of key points:</p>
+<ul>
+<li>
+<p><strong>Passing Data:</strong> Props allow you to pass data or values (strings, numbers, objects, functions, etc.) from a parent component to a child component.</p>
+</li>
+<li>
+<p><strong>Immutable:</strong> Props are immutable, which means once they are set in a child component, they cannot be changed from within that component.</p>
+</li>
+<li>
+<p><strong>Example:</strong> Suppose you have a <code>User</code> component that displays user information, and you pass the user's name and email as props from a parent component:</p>
+</li>
+</ul>
+<div class="language-jsx highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">ParentComponent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;johndoe@example.com&#39;</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">User</span><span class="w"> </span><span class="na">name</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="w"> </span><span class="na">email</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="kd">function</span><span class="w"> </span><span class="nx">User</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Email</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">email</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h3>
+<p>State is used to manage a component's internal data that can change over time and trigger re-renders when updated. Here are the key points about state:</p>
+<ul>
+<li>
+<p><strong>Internal Data:</strong> State is used to store and manage data within a component. It's mutable and can be changed using the <code>setState</code> method.</p>
+</li>
+<li>
+<p><strong>Reactivity:</strong> When state data changes, React automatically re-renders the component to reflect those changes in the UI.</p>
+</li>
+<li>
+<p><strong>Example:</strong> Suppose you have a <code>Counter</code> component that displays and updates a count value:</p>
+</li>
+</ul>
+<div class="language-jsx highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">Component</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;docs/react/index&#39;</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">class</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Component</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="k">super</span><span class="p">();</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="nx">count</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="p">};</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nx">incrementCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">count</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">});</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">            </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">                </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Count</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">                </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">incrementCount</span><span class="p">}&gt;</span><span class="nx">Increment</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">            </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="p">}</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Counter</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="differences-between-props-and-state">Differences Between Props and State<a class="headerlink" href="#differences-between-props-and-state" title="Permanent link">&para;</a></h3>
+<p>To further clarify the distinctions between props and state, let's delve into their differences in more detail:</p>
+<ol>
+<li>
+<p><strong>Source of Data:</strong></p>
+<ul>
+<li>
+<p><strong>Props:</strong> Data in props is passed from parent components to child components. It flows in one direction, from top to bottom in your component hierarchy.</p>
+</li>
+<li>
+<p><strong>State:</strong> State is internal to a component and is managed within that component itself. It doesn't depend on external sources and can change over time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Mutability:</strong></p>
+<ul>
+<li>
+<p><strong>Props:</strong> Props are immutable, meaning that child components cannot modify the data received via props. They are essentially read-only.</p>
+</li>
+<li>
+<p><strong>State:</strong> State is mutable, and components can modify their own state using the <code>setState</code> method. When state changes, it triggers a re-render of the component.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>
+<p><strong>Props:</strong> They are primarily used for passing data and configuration to child components. For example, passing user information, settings, or configuration data.</p>
+</li>
+<li>
+<p><strong>State:</strong> State is used for managing dynamic and changing data within a component. It's ideal for handling user input, toggling UI elements, or maintaining data that can change during the component's lifecycle.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Updates and Re-renders:</strong></p>
+<ul>
+<li>
+<p><strong>Props:</strong> Changes in props are not controlled by the component that receives them. They are updated externally by the parent component. Changes in props can cause the child component to re-render, but it's not directly controlled by the child component.</p>
+</li>
+<li>
+<p><strong>State:</strong> A component can control its own state and trigger re-renders when the state changes. This gives you fine-grained control over how and when your component updates in response to data changes.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Default Values:</strong></p>
+<ul>
+<li>
+<p><strong>Props:</strong> You can set default values for props using PropTypes or default function parameters in functional components.</p>
+</li>
+<li>
+<p><strong>State:</strong> You initialize state in class components within the constructor or use the <code>useState</code> hook in functional components with an initial value.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Accessing Data:</strong></p>
+<ul>
+<li>
+<p><strong>Props:</strong> Data from props is accessed using the <code>props</code> object in functional components or <code>this.props</code> in class components.</p>
+</li>
+<li>
+<p><strong>State:</strong> State data is accessed using <code>this.state</code> in class components or the state variable returned by the <code>useState</code> hook in functional components.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Understanding these differences is crucial for effectively designing and building React applications. Using props for passing data and state for managing component-specific dynamic data helps maintain a clear and predictable flow of information within your application.</p>
+<h4 id="best-practices-for-props">Best Practices for Props:<a class="headerlink" href="#best-practices-for-props" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>Keep Props Simple:</strong> Props should ideally contain simple data or functions to maintain a clear and understandable interface between parent and child components.</p>
+</li>
+<li>
+<p><strong>Documentation:</strong> Document the props your components accept, including their data types and descriptions, using tools like PropTypes or TypeScript.</p>
+</li>
+<li>
+<p><strong>Immutable Props:</strong> Treat props as read-only. If a child component needs to modify data received via props, consider lifting the state to a higher-level component.</p>
+</li>
+<li>
+<p><strong>Destructuring Props:</strong> In functional components, use object destructuring to simplify the access to props. For example, <code>function MyComponent({ prop1, prop2 }) { /* ... */ }</code>.</p>
+</li>
+</ol>
+<h4 id="best-practices-for-state">Best Practices for State:<a class="headerlink" href="#best-practices-for-state" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>Initialize State Correctly:</strong> In class components, initialize state in the constructor. In functional components, use the <code>useState</code> hook and ensure that it receives an initial value.</p>
+</li>
+<li>
+<p><strong>Avoid Direct State Mutations:</strong> Never directly modify state using <code>this.state</code> in class components. Use <code>setState</code> to update state to ensure proper reactivity.</p>
+</li>
+<li>
+<p><strong>Functional setState:</strong> When updating state that depends on the previous state value, use the functional form of <code>setState</code> to prevent race conditions.</p>
+</li>
+</ol>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">((</span><span class="nx">prevState</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">count</span><span class="o">:</span><span class="w"> </span><span class="nx">prevState</span><span class="p">.</span><span class="nx">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}));</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p><strong>State Consolidation:</strong> If multiple state values are closely related, consider consolidating them into a single state object to simplify management.</p>
+</li>
+<li>
+<p><strong>Avoid Excessive State:</strong> Don't overuse state within components. Keep state localized to the minimal amount needed to maintain the component's functionality.</p>
+</li>
+<li>
+<p><strong>Consider Using State Management Libraries:</strong> For complex applications, consider using state management libraries like Redux or Mobx to manage application-wide state.</p>
+</li>
+</ol>
+<h4 id="when-to-choose-props-vs-state">When to Choose Props vs. State:<a class="headerlink" href="#when-to-choose-props-vs-state" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Use props when data needs to flow from parent to child components.</li>
+<li>Use state when dealing with dynamic, component-specific data that can change over time.</li>
+<li>Consider using a combination of props and state when building complex UI components.</li>
+</ul>
+<p>By following these best practices and understanding the nuances of props and state in React, you can build more maintainable and predictable applications that efficiently manage and display data.</p>
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.highlight", "navigation.path", "navigation.top", "content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", {"palette": [{"media": "(prefers-color-scheme)", "toggle": {"icon": "material/link", "name": "Switch to light mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: light)", "primary": "indigo", "scheme": "default", "toggle": {"icon": "material/toggle-switch", "name": "Switch to dark mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: dark)", "primary": "black", "scheme": "slate", "toggle": {"icon": "material/toggle-switch-off", "name": "Switch to system preference"}}]}], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.caa56a14.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../javascripts/tablesort.js"></script>
+      
+    
+  </body>
+</html>

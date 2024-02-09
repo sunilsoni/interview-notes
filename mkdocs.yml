@@ -1,0 +1,240 @@
+site_name: Interview Docs
+site_url: https://interview-docs.com/
+extra:
+  generator: false
+
+# Plugins
+plugins:
+  - tags:
+        tags_file: tags.md
+  - search
+  - minify
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+#  logo: assets/logo4.png
+#    favicon: assets/logo.png
+  features:
+    - search.highlight
+    - search.suggest
+    - navigation.path
+    - navigation.top
+    - content.code.copy
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.path
+    - navigation.indexes
+    - palette:
+        - media: "(prefers-color-scheme)"
+          toggle:
+            icon: material/link
+            name: Switch to light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: indigo
+          accent: indigo
+          toggle:
+            icon: material/toggle-switch
+            name: Switch to dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: black
+          accent: indigo
+          toggle:
+            icon: material/toggle-switch-off
+            name: Switch to system preference
+watch:
+  - includes
+
+# Extensions
+markdown_extensions:
+  - tables
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+
+# Page tree
+nav:
+  - Home: index.md
+  - 'Languages' :
+    - 'Java':
+        - java/index.md
+        - 'Java 8': 'java/java8/java8.md'
+        - 'Functional Interface': 'java/java8/FunctionalInterface.md'
+        - 'Java 17': 'java/java17.md'
+    - 'Node.js':
+        - 'Node.js': 'nodejs/index.md'
+        - 'Module': 'nodejs/module.md'
+        - 'Event Loop': 'nodejs/eventloop.md'
+        - 'Express.js': 'nodejs/express.md'
+    - 'Python':
+        - 'Python': 'python/index.md'
+    - 'Golang':
+        - 'Golang': 'golang/index.md'
+  - Web Development:
+    - 'Spring':
+        - 'Spring': 'spring/index.md'
+        - 'Spring Security': 'spring/security/security.md'
+        - 'Spring Boot': 'spring/springboot/spring-boot.md'
+        - 'Spring Boot Actuator': 'spring/springboot/springboot-actuator.md'
+        - 'Spring MVC': 'spring/spring-mvc.md'
+    - 'Microservices':
+        - 'Microservices': 'microservices/index.md'
+        - 'SOLID': 'microservices/solid.md'
+    - 'Angular':
+        - 'Angular': 'angular/index.md'
+    - 'Javascript':
+        - 'Javascript': 'javascript/index.md'
+    - 'TypeScript':
+        - 'TypeScript': 'typescript/index.md'
+    - 'React':
+        - 'React': 'react/index.md'
+        - 'Lifecycle Methods': 'react/lifecycle.md'
+        - 'Jest': 'react/jest.md'
+        - 'Enzyme': 'react/enzyme.md'
+        - 'ESLint': 'react/eslint.md'
+        - 'Performance': 'react/performance.md'
+        - 'React Router': 'react/react-router.md'
+        - 'Redux': 'react/redux.md'
+        - 'Redux Thunk': 'react/redux-thunk.md'
+        - 'Rest API': 'react/rest-api.md'
+        - 'Testing': 'react/testing.md'
+  - 'MQ':
+    - 'Apache Kafka': 'mq/kafka.md'
+    - 'RabbitMQ': 'mq/rebbitmq.md'
+    - 'Apache ActiveMQ': 'mq/activemq.md'
+    - 'Amazon SQS (Simple Queue Service)': 'mq/sqs.md'
+    - 'Microsoft Azure sqs.md': 'mq/servicebus.md'
+    - 'Google Cloud Pub/Sub': 'mq/pubsub.md'
+    - 'Redis Pub/Sub': 'mq/redis.md'
+  - 'DevOps':
+      - 'devops/index.md'
+      - 'AWS': 'devops/cloud/aws.md'
+      - 'Azure': 'devops/cloud/azure.md'
+      - 'GCP': 'devops/cloud/gcp.md'
+      - 'OpenShift': 'devops/cloud/openshift.md'
+      - 'VCS': 'devops/vcs.md'
+      - 'CI/CD': 'devops/cicd.md'
+      - 'Configuration Management': 'devops/config.md'
+      - 'Containerization and Orchestration': 'devops/orchestration.md'
+      - 'Infrastructure as Code (IaC)': 'devops/iac.md'
+      - 'Monitoring and Logging': 'devops/logging.md'
+      - 'Container Registries': 'devops/container.md'
+      - 'Security Scanning and Compliance': 'devops/scanning.md'
+      - 'Artifact Repository': 'devops/artifact.md'
+      - 'GitOps': 'devops/gitops.md'
+  - 'Database':
+      - 'Database': 'db/index.md'
+      - 'Cassandra': 'db/cassandra.md'
+      - 'Couchbase': 'db/couchbase.md'
+      - 'DynamoDB': 'db/dynamoDB.md'
+      - 'MongoDB': 'db/mongodb.md'
+      - 'Oracle': 'db/oracle.md'
+      - 'PostgreSql': 'db/postgreSql.md'
+      - 'Redis': 'db/redis.md'
+  - 'Design Pattern':
+      - 'Design Pattern': 'design-pattern/index.md'
+      - 'Behavioral Pattern': 'design-pattern/behavioral-pattern.md'
+      - 'Creational Pattern': 'design-pattern/creational-pattern.md'
+      - 'Structural Pattern': 'design-pattern/structural-pattern.md'
+      - 'Other Pattern': 'design-pattern/other-pattern.md'
+  - 'Algorithms':
+      - 'Data Structures': 'ds-algo/index.md'
+      - 'Algorithms': 'ds-algo/algorithms.md'
+  - 'QA':
+      - 'Quality Assurance': 'qa/index.md'
+      - 'Cucumber': 'qa/cucumber.md'
+      - 'Selenium': 'qa/website/selenium.md'
+      - 'Protractor': 'qa/website/protractor.md'
+      - 'Cypress': 'qa/website/cypress.md'
+      - 'WebdriverIO': 'qa/website/webdriverIO.md'
+      - 'Apigee': 'qa/microservices/apigee.md'
+      - 'Cucumber': 'qa/microservices/apigee.md'
+      - 'jest': 'qa/microservices/jest.md'
+      - 'Mocha/Chai': 'qa/microservices/mocha-chai.md'
+      - 'karate': 'qa/microservices/karate.md'
+      - 'postman': 'qa/microservices/postman.md'
+      - 'Rest Assured': 'qa/microservices/rest-assured.md'
+      - 'TestNG': 'qa/microservices/testng.md'
+      - 'Appium': 'qa/mobile/appium.md'
+      - 'Robot Framework': 'qa/mobile/robot-framework.md'
+      - 'JMeter': 'qa/jmeter.md'
+  - 'Assessment':
+      - 'Angular': 'assessment/angular.md'
+      - 'Java': 'assessment/java.md'
+      - 'Spring': 'assessment/spring.md'
+      - 'React': 'assessment/react.md'
+      - 'Node.js': 'assessment/nodejs.md'
+      - 'Python': 'assessment/python.md'
+  - 'Project':
+      - 'Company': 'projects/company.md'
+      - 'Bank': 'projects/banks.md'
+      - 'Healthcare': 'projects/healthcare.md'
+      - 'Government & Public': 'projects/government.md'
+      - 'Healthcare': 'projects/healthcare.md'
+      - 'IT industry': 'projects/it-industry.md'
+      - 'Retail and E-commerce': 'projects/retail.md'
+      - 'Telecommunication': 'projects/telecommunication.md'
+  - 'Misc':
+      - 'Agile methodology': 'misc/agile.md'
+      - 'Security Scan Tools': 'misc/security-scan.md'
+      - 'Production Support Tools': 'misc/production-support.md'
+
+  - Tags: 'tags.md'
+
+
+
+
+
+
+
