@@ -1,5 +1,5 @@
-site_name: Interview Docs
-site_url: https://interview-docs.com/
+site_name: Interview Notes
+site_url: https://interview-notes.com/
 extra:
   generator: false
 
@@ -212,7 +212,6 @@ nav:
       - 'Agile methodology': 'misc/agile.md'
       - 'Security Scan Tools': 'misc/security-scan.md'
       - 'Production Support Tools': 'misc/production-support.md'
-
   - Tags: 'tags.md'
 
 
