@@ -8,7 +8,6 @@ plugins:
   - tags:
         tags_file: tags.md
   - search
-  - minify
 
 theme:
   name: material
