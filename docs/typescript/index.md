@@ -24,9 +24,57 @@ tags:
 ## TypeScript
 
 
+### TypeScript Version History
+
+Below is a table detailing the TypeScript version history in descending order, highlighting the release dates, version numbers, and notable changes for each version. TypeScript, developed by Microsoft, is a typed superset of JavaScript that compiles to plain JavaScript. It's designed to add static types to the language, among other features, to improve the developer experience and the maintainability of large codebases.
+
+| Version Number | Release Date | Notable Changes                                                                                                                      |
+|----------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| 4.9            | November 2022| - Introduction of `satisfies` operator for type checking. <br> - Improved inference for generic functions.                           |
+| 4.8            | August 2022  | - Control flow analysis for destructured discriminated unions. <br> - Improved narrowing for `in` operator.                          |
+| 4.7            | May 2022     | - ECMAScript module support in Node.js. <br> - Improved type narrowing and control flow analysis.                                    |
+| 4.6            | February 2022| - Support for control flow analysis of aliased conditions. <br> - Improved recursion depth checks.                                   |
+| 4.5            | November 2021| - Awaited type and `Promise` improvements. <br> - `--module es2022` and `--moduleResolution node16`.                                 |
+| 4.4            | August 2021  | - Control flow analysis for computed properties. <br> - New flag for exact optional property types (`--exactOptionalPropertyTypes`). |
+| 4.3            | May 2021     | - `override` keyword and template string type improvements. <br> - Separate write types for properties.                              |
+| 4.2            | February 2021| - Rest elements in tuple types. <br> - Smarter type alias preservation.                                                              |
+| 4.1            | November 2020| - Template literal types. <br> - Key remapping in mapped types.                                                                      |
+| 4.0            | August 2020  | - Variadic tuple types. <br> - Labeled tuple elements. <br> - Class property inference from constructors.                            |
+| 3.9            | May 2020     | - Improved inference and `Promise.all` typing. <br> - Speed improvements in the compiler/checker.                                    |
+| 3.8            | February 2020| - Type-only imports and exports. <br> - ECMAScript private fields.                                                                   |
+| 3.7            | November 2019| - Optional chaining and nullish coalescing. <br> - Assertion functions.                                                              |
+| 3.6            | August 2019  | - Stricter checking for iterators and generators. <br> - More accurate array spread.                                                 |
+| 3.5            | May 2019     | - The `Omit` helper type. <br> - Improved speed for `--incremental` compilations.                                                    |
+| 3.4            | March 2019   | - Const assertions. <br> - Incremental compilation support.                                                                          |
+| 3.3            | January 2019 | - Improved handling of union types and intersection types.                                                                           |
+| 3.2            | November 2018| - Strict bind, call, and apply checking. <br> - Object spread and rest on generic types.                                             |
+| 3.1            | September 2018| - Mapped types on tuples and arrays. <br> - `unknown` type.                                                                          |
+| 3.0            | July 2018    | - Project references for easier management of multi-project setups. <br> - `unknown` type as a safer alternative to `any`.           |
+| 2.9            | May 2018     | - Import types using `import()` syntax. <br> - Support for `--resolveJsonModule`.                                                    |
+| 2.8            | March 2018   | - Conditional types. <br> - `ReadonlyArray` and `readonly` tuples.                                                                   |
+| 2.7            | January 2018 | - Strict class property initialization checks. <br> - Fixed length tuples.                                                           |
+| 2.6            | October 2017 | - Stricter checking for function types. <br> - `--strictFunctionTypes` flag.                                                         |
+| 2.5            | September 2017| - Optional catch clause variables. <br> - `--checkJs` flag for checking JavaScript files.                                            |
+| 2.4            | June 2017    | - Support for dynamic `import()` expressions. <br> - String enums.                                                                   |
+| 2.3            | April 2017   | - `--strictNullChecks` flag improvements. <br> - Generator and iterator support.                                                     |
+| 2.2            | February 2017| - Object type for non-primitive types. <br> - Mixin support.                                                                         |
+| 2.1            | December 2016| - Keyof and lookup types. <br> - Mapped types.                                                                                       |
+| 2.0            | September 2016| - Introduction of `null` and `undefined` types. <br> - Control flow based type analysis.                                             |
+| 1.8            | February 2016| - String literal types. <br> - JSX support.                                                                                          |
+| 1.7            | November 2015| - Async/await (for ES6 targets). <br> - Polymorphic `this` type.                                                                     |
+| 1.6            | September 2015| - Support for React/JSX. <br> - Class expressions.                                                                                   |
+| 1.5            | July 2015    | - Decorators and metadata reflection API. <br> - Destructuring in declarations and assignments.                                      |
+| 1.4            | January 2015 | - Union types. <br> - `let` and `const` support.                                                                                     |
+| 1.3            | November 2014| - `protected` modifier. <br> - Tuple types.                                                                                          |
+| 1.2            | June 2014    | - Enumeration types. <br> - Generic constraint checking.                                                                             |
+| 1.1            | April 2014   | - Performance improvements. <br> - Minor syntax enhancements.                                                                        |
+| 1.0            | October 2012 | - Initial release.                                                                                                                   |
+
+
+
 TypeScript is a superset of JavaScript, meaning it builds upon and extends JavaScript with additional features. Here's a detailed comparison between TypeScript and JavaScript:
 
-### TypeScript:
+
 
 1. **Static Typing:** TypeScript introduces static typing, allowing you to specify the data types of variables. This helps catch type-related errors during development, enhancing code reliability. For example:
 

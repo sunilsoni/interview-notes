@@ -6,6 +6,7 @@ search:
   boost: 2
 tags:
   - JavaScript
+  - JavaScript Version History
   - double equals and triple equals
   - Hoisting
   - Callback Functions
@@ -30,6 +31,28 @@ tags:
 JavaScript is a versatile and widely-used programming language primarily used for web development. It allows developers
 to add interactivity and dynamic behavior to websites. JavaScript is an essential component of modern web development,
 and it runs in web browsers, making it a client-side scripting language.
+
+### JavaScript Version History
+
+JavaScript, unlike frameworks such as React or Angular, evolves through the ECMAScript (ES) standard. The ECMAScript standard has seen several updates over the years, each bringing new features and improvements to the language. Below is a table highlighting the major ECMAScript versions, their release years, and notable changes introduced in each version.
+
+| Version       | Release Year | Notable Changes |
+|---------------|--------------|-----------------|
+| ES1           | 1997         | - Initial version. |
+| ES2           | 1998         | - Minor editorial changes to align with the ISO/IEC standard. |
+| ES3           | 1999         | - Added Regular Expressions. <br> - Added `try`/`catch`. <br> - Improved string handling. |
+| ES4           | Abandoned    | - Was ambitious, including classes, modules, but ultimately abandoned. |
+| ES5           | 2009         | - Added `JSON.parse` and `JSON.stringify`. <br> - Added `Array.prototype` methods like `forEach`, `map`, `filter`, etc. <br> - Strict mode. |
+| ES5.1         | 2011         | - Minor corrections. <br> - ISO/IEC standardization. |
+| ES6/ES2015    | 2015         | - Introduced classes and modules. <br> - Arrow functions. <br> - Promises. <br> - Template literals. <br> - Block-scoped constructs `let` and `const`. |
+| ES2016        | 2016         | - Added `Array.prototype.includes`. <br> - Exponentiation operator (`**`). |
+| ES2017        | 2017         | - `async`/`await`. <br> - `Object.entries` and `Object.values`. <br> - `String.prototype.padStart` and `padEnd`. |
+| ES2018        | 2018         | - Rest/Spread properties. <br> - Asynchronous iteration. <br> - `Promise.finally()`. <br> - RegExp improvements. |
+| ES2019        | 2019         | - `Array.prototype.flat` and `flatMap`. <br> - `Object.fromEntries`. <br> - `String.prototype.trimStart` and `trimEnd`. <br> - Optional `catch` binding. |
+| ES2020        | 2020         | - `BigInt`. <br> - Dynamic import(). <br> - `Promise.allSettled`. <br> - `String.prototype.matchAll`. <br> - Global `this`. |
+| ES2021        | 2021         | - `String.prototype.replaceAll`. <br> - `Promise.any`. <br> - Logical assignment operators (`??=`, `&&=`, `||=`). <br> - Numeric separators. |
+| ES2022        | 2022         | - Class fields (public and private). <br> - Static class blocks. <br> - `Array.prototype.at`. <br> - `Object.hasOwn`. |
+
 
 ### Key Features of JavaScript
 

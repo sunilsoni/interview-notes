@@ -1,27 +1,27 @@
 ---
-layout: default
-title: Spring
-has_children: true
-nav_order: 2
-permalink: docs/spring
-resource: true
-desc: "Spring interview questions and answers."
-categories: [Spring]
----
+title:  Spring
 
-# Spring
-{: .no_toc }
+hide:
+- tags
+  
+tags:
+    -  Spring
 
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
+
 
 ---
+
+# Spring 
+
+---
+
+
+
+## Spring 
+
+
+
+
 
 The Spring Framework provides a comprehensive programming and configuration model for modern Java-based enterprise applications - on any kind of deployment platform.
 
@@ -1073,16 +1073,6 @@ we also have  other settings
 
 
 ---
-
-## Misc Questions
-
-### What happens if we use  service annotation on a repository class  in spring boot ?
-
-If you annotate a repository class with the `@Service` annotation in Spring Boot, it will still be treated as a repository class. However, by convention, it is more common to use the `@Repository` annotation for DAO (Data Access Object) classes in Spring, as this provides a more clear indication of the class's purpose.
-
-Annotating a repository class with @Service could lead to confusion and make it harder for other developers to understand the purpose of the class. Additionally, in a large codebase with many different types of classes, having clear, well-defined annotations can help with organization and maintainability.
-
-That being said, if you annotate a repository class with `@Service`, it will still work as expected, since both `@Service` and `@Repository` are simply specializations of the `@Component` annotation, which tells Spring to include the class in component scanning and create a bean for it.
 
 
 

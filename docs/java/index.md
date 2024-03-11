@@ -4,7 +4,9 @@ hide:
   - tags
 
 tags:
-- Java
+    - Java
+    - Java Version History
+
 ---
 
 
@@ -16,6 +18,33 @@ tags:
 Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies. It is a computing platform for application development. Java is fast, secure, and reliable, therefore. It is widely used for developing Java applications in laptops, data centers, game consoles, scientific supercomputers, cell phones, etc.
 
 ---
+
+### Java Version History
+
+
+
+| Version       | Release Date | Notable Changes |
+|---------------|--------------|-----------------|
+| Java 18       | March 2022   | - Introduced Project Panama's Foreign Function & Memory API (Incubator). <br> - Simple Web Server for prototyping and testing. <br> - Code snippets in Java API documentation. |
+| Java 17 (LTS) | September 2021| - Sealed classes to restrict which other classes or interfaces may extend or implement them. <br> - Pattern matching for `switch` (preview). <br> - Strong encapsulation of JDK internals. |
+| Java 16       | March 2021   | - Record classes to model data aggregates. <br> - Pattern matching for `instanceof`. <br> - Foreign-Memory Access API (Incubator). |
+| Java 15       | September 2020| - Sealed classes (preview). <br> - Hidden classes to improve the encapsulation of non-discoverable classes. <br> - Text blocks for multi-line string literals. <br> - Pattern matching for `instanceof` (second preview). |
+| Java 14       | March 2020   | - Record classes (preview). <br> - Pattern matching for `instanceof` (preview). <br> - Helpful NullPointerExceptions. <br> - Switch expressions become standard. |
+| Java 13       | September 2019| - Text blocks (preview). <br> - Reimplementation of the legacy Socket API. |
+| Java 12       | March 2019   | - Switch expressions (preview). <br> - Microbenchmark Suite. <br> - JVM changes to improve performance. |
+| Java 11 (LTS) | September 2018| - New HttpClient API. <br> - Local-Variable Syntax for Lambda Parameters. <br> - Launch Single-File Source-Code Programs. |
+| Java 10       | March 2018   | - Local-variable type inference (`var`). <br> - Application class-data sharing to reduce startup time. |
+| Java 9        | September 2017| - Module system (Project Jigsaw). <br> - JShell: interactive Java REPL. <br> - Private interface methods. |
+| Java 8        | March 2014   | - Lambda expressions and Stream API. <br> - New Date-Time API. <br> - Annotation on Java types. <br> - Interface default and static methods. |
+| Java 7        | July 2011    | - Try-with-resources statement. <br> - Catching multiple exception types and rethrowing exceptions with improved type checking. <br> - Support for dynamic languages. |
+| Java 6        | December 2006| - Scripting support. <br> - JDBC 4.0 API. <br> - Improvements to the Java Compiler API and Pluggable Annotation Processing API. |
+| Java 5        | September 2004| - Generics. <br> - Enhanced for loop (for-each). <br> - Autoboxing/unboxing. <br> - Enumerations. <br> - Static imports. <br> - Metadata (Annotations). |
+| Java 1.4      | February 2002| - Regular expressions. <br> - Exception chaining. <br> - IPv6 support. <br> - NIO (New I/O). |
+| Java 1.3      | May 2000     | - HotSpot JVM included. <br> - JNDI, JPDA, and JavaSound APIs. |
+| Java 1.2      | December 1998| - Introduction of the Swing graphical API. <br> - The `Collections` framework. <br> - Java Plug-in. <br> - Java IDL for CORBA interoperability. |
+| Java 1.1      | February 1997| - JDBC for database access. <br> - Inner classes. <br> - JavaBeans. <br> - Reflection. |
+| Java 1.0      | January 1996 | - Initial release. |
+
 
 ## Java Features
 

@@ -124,9 +124,13 @@ nav:
     - 'Spring':
         - 'Spring': 'spring/index.md'
         - 'Spring Security': 'spring/security/security.md'
+        - 'Spring Annotations': 'spring/security/annotations.md'
+        - 'Spring Security Filters ': 'spring/security/filters.md'
         - 'Spring Boot': 'spring/springboot/spring-boot.md'
         - 'Spring Boot Actuator': 'spring/springboot/springboot-actuator.md'
         - 'Spring MVC': 'spring/spring-mvc.md'
+        - 'Spring Transaction': 'spring/transaction.md'
+        - 'Spring WebFlux': 'spring/webFlux.md'
     - 'Microservices':
         - 'Microservices': 'microservices/index.md'
         - 'SOLID': 'microservices/solid.md'
@@ -139,6 +143,7 @@ nav:
     - 'React':
         - 'React': 'react/index.md'
         - 'Lifecycle Methods': 'react/lifecycle.md'
+        - 'React Component': 'react/react-component.md'
         - 'Jest': 'react/jest.md'
         - 'Enzyme': 'react/enzyme.md'
         - 'ESLint': 'react/eslint.md'
@@ -148,6 +153,11 @@ nav:
         - 'Redux Thunk': 'react/redux-thunk.md'
         - 'Rest API': 'react/rest-api.md'
         - 'Testing': 'react/testing.md'
+        - 'Testing': 'react/nextjs.md'
+    - 'HTML':
+        - 'HTML': 'html/index.md'
+    - 'CSS':
+        - 'CSS': 'css/index.md'
   - 'MQ':
     - 'Apache Kafka': 'mq/kafka.md'
     - 'RabbitMQ': 'mq/rebbitmq.md'
@@ -214,6 +224,7 @@ nav:
       - 'Production Support Tools': 'misc/production-support.md'
 
   - Tags: 'tags.md'
+
 
 
 

@@ -1,25 +1,4 @@
----
-layout: default
-title: Spring AOP
-parent: Spring
-resource: true
-desc: "Spring AOP interview questions and answers."
-categories: [Spring AOP]
----
 
-# Spring AOP
-{: .no_toc }
-
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
-
----
 
 ##  Introducing Spring AOP
 

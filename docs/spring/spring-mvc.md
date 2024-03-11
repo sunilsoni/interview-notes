@@ -1,26 +1,24 @@
 ---
-layout: default
-title: Spring MVC
-parent: Spring
-resource: true
-desc: "  Spring MVC interview questions and answers."
-categories: [ Spring MVC]
+title:  Spring MVC
+
+hide:
+  - tags
+tags:
+  -  Spring MVC
+
+
+
 ---
 
 # Spring MVC
-{: .no_toc }
-
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
 
 ---
-##  Introduction to Spring MVC
+
+
+
+## Spring MVC
+
+ 
 
 
 Spring MVC framework is a robust Model view controller framework which helps us to develop a loosely coupled web application. It separates different aspects of web applications with the help of MVC architecture.
