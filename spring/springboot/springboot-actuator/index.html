@@ -1,0 +1,4888 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://interview-notes.com/spring/springboot/springboot-actuator/">
+      
+      
+        <link rel="prev" href="../spring-boot/">
+      
+      
+        <link rel="next" href="../../spring-mvc/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Spring Boot Actuator - Interview Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spring-boot-actuator" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Interview Notes" class="md-header__button md-logo" aria-label="Interview Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Interview Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Spring Boot Actuator
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../java/" class="md-tabs__link">
+          
+  
+    
+  
+  Languages
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  Web Development
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../mq/kafka/" class="md-tabs__link">
+          
+  
+    
+  
+  MQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../devops/" class="md-tabs__link">
+          
+  
+    
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../db/" class="md-tabs__link">
+          
+  
+    
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+    
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../design-pattern/" class="md-tabs__link">
+          
+  
+    
+  
+  Design Pattern
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ds-algo/" class="md-tabs__link">
+          
+  
+    
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../qa/" class="md-tabs__link">
+          
+  
+    
+  
+  QA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../misc/agile/" class="md-tabs__link">
+          
+  
+    
+  
+  Misc
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../tags/" class="md-tabs__link">
+        
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Interview Notes" class="md-nav__button md-logo" aria-label="Interview Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Interview Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Languages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Languages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../java/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java8/java8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 8
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java8/FunctionalInterface/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Functional Interface
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../nodejs/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Node.js
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Node.js
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nodejs/module/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nodejs/eventloop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event Loop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nodejs/express/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Express.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../python/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../golang/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Golang
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Golang
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Web Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Web Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/annotations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Annotations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security Filters 
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-boot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Spring Boot Actuator
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot Actuator
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spring-boot-actuator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spring Boot Actuator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spring Boot Actuator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-spring-boot-actuator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling Spring Boot Actuator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-spring-boot-actuator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Spring Boot Actuator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Spring Boot Actuator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-include-actuator-dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Include Actuator Dependency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-configure-actuator-endpoints-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Configure Actuator Endpoints (Optional)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-accessing-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Accessing Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-secure-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Secure Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commonly-used-spring-boot-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commonly Used Spring Boot Actuator Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commonly Used Spring Boot Actuator Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actuatorhealth" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. /actuator/health
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-actuatorinfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. /actuator/info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-actuatormetrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. /actuator/metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-actuatorenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. /actuator/env
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-actuatorloggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. /actuator/loggers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-actuatorthreaddump" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. /actuator/threaddump
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-actuatorheapdump" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. /actuator/heapdump
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-actuatorauditevents" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. /actuator/auditevents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-endpoint-exposure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Endpoint Exposure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extending-actuators-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extending Actuator’s Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-custom-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Custom Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-health-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Health Indicators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrating-with-external-monitoring-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating with External Monitoring Systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#securing-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Securing Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#including-or-excluding-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Including or Excluding Actuator Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Including or Excluding Actuator Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-applicationproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using application.properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-applicationyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using application.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-include-and-exclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combining Include and Exclude
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fine-grained-exposure-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fine-Grained Exposure Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrating-with-external-monitoring-systems_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating with External Monitoring Systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrating with External Monitoring Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Prometheus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization-with-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization with Grafana
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategies-for-scaling-monitoring-in-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategies for Scaling Monitoring in Microservices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Strategies for Scaling Monitoring in Microservices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-centralized-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Centralized Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-distributed-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Distributed Tracing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-metrics-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Metrics Aggregation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-dynamic-service-discovery-for-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Dynamic Service Discovery for Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-unified-dashboard-for-metrics-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Unified Dashboard for Metrics Visualization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-health-check-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Health Check Aggregation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-alerting-and-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Alerting and Notification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-automate-response-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Automate Response Mechanisms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-security-and-access-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Security and Access Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-regular-review-and-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Regular Review and Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-mvc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring MVC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../transaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Transaction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../webFlux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring WebFlux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../microservices/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Microservices
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Microservices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../microservices/solid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SOLID
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../angular/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Angular
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Angular
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../javascript/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Javascript
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Javascript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../typescript/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    TypeScript
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            TypeScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../react/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            React
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lifecycle Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/react-component/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Component
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/enzyme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enzyme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/eslint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESLint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/react-router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Router
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/redux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/redux-thunk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux Thunk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/rest-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../react/nextjs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../html/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    HTML
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            HTML
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../css/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CSS
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            CSS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mq/kafka/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache Kafka
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mq/rebbitmq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mq/activemq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache ActiveMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mq/sqs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Amazon SQS (Simple Queue Service)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mq/servicebus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microsoft Azure sqs.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mq/pubsub/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Cloud Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mq/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../devops/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            DevOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/cloud/aws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/cloud/azure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/cloud/gcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/cloud/openshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenShift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/vcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VCS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization and Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/iac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure as Code (IaC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Monitoring and Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Container Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/scanning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scanning and Compliance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/artifact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifact Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devops/gitops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../db/" class="md-nav__link ">
+              
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/cassandra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cassandra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/couchbase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Couchbase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/dynamoDB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DynamoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/mongodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MongoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/oracle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Oracle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/postgreSql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PostgreSql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../design-pattern/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Design Pattern
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Design Pattern
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-pattern/behavioral-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Behavioral Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-pattern/creational-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creational Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-pattern/structural-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structural Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-pattern/other-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../ds-algo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ds-algo/algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../qa/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    QA
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            QA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/cucumber/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/website/selenium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selenium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/website/protractor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protractor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/website/cypress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cypress
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/website/webdriverIO/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebdriverIO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apigee
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/mocha-chai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mocha/Chai
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/karate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    karate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/postman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    postman
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/rest-assured/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest Assured
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/microservices/testng/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestNG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/mobile/appium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/mobile/robot-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Robot Framework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../qa/jmeter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JMeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/agile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agile methodology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/security-scan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scan Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/production-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Production Support Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tags
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spring-boot-actuator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spring Boot Actuator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spring Boot Actuator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-spring-boot-actuator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling Spring Boot Actuator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-spring-boot-actuator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Spring Boot Actuator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Spring Boot Actuator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-include-actuator-dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Include Actuator Dependency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-configure-actuator-endpoints-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Configure Actuator Endpoints (Optional)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-accessing-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Accessing Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-secure-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Secure Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commonly-used-spring-boot-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commonly Used Spring Boot Actuator Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commonly Used Spring Boot Actuator Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actuatorhealth" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. /actuator/health
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-actuatorinfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. /actuator/info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-actuatormetrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. /actuator/metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-actuatorenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. /actuator/env
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-actuatorloggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. /actuator/loggers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-actuatorthreaddump" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. /actuator/threaddump
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-actuatorheapdump" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. /actuator/heapdump
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-actuatorauditevents" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. /actuator/auditevents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-endpoint-exposure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Endpoint Exposure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extending-actuators-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extending Actuator’s Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-custom-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Custom Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-health-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Health Indicators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrating-with-external-monitoring-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating with External Monitoring Systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#securing-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Securing Actuator Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#including-or-excluding-actuator-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Including or Excluding Actuator Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Including or Excluding Actuator Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-applicationproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using application.properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-applicationyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using application.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-include-and-exclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combining Include and Exclude
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fine-grained-exposure-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fine-Grained Exposure Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrating-with-external-monitoring-systems_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating with External Monitoring Systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrating with External Monitoring Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Prometheus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization-with-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization with Grafana
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategies-for-scaling-monitoring-in-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategies for Scaling Monitoring in Microservices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Strategies for Scaling Monitoring in Microservices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-centralized-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Centralized Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-distributed-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Distributed Tracing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-metrics-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Metrics Aggregation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-dynamic-service-discovery-for-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Dynamic Service Discovery for Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-unified-dashboard-for-metrics-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Unified Dashboard for Metrics Visualization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-health-check-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Health Check Aggregation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-alerting-and-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Alerting and Notification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-automate-response-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Automate Response Mechanisms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-security-and-access-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Security and Access Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-regular-review-and-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Regular Review and Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+<nav class="md-tags" hidden>
+  
+    
+    
+    
+      <a href="../../../tags/#actuator" class="md-tag">Actuator</a>
+    
+  
+</nav>
+
+
+
+<h1 id="spring-boot-actuator">Spring Boot Actuator<a class="headerlink" href="#spring-boot-actuator" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="spring-boot-actuator_1">Spring Boot Actuator<a class="headerlink" href="#spring-boot-actuator_1" title="Permanent link">&para;</a></h2>
+<p>Spring Boot Actuator is a sub-project of Spring Boot. It provides a series of ready-to-use features that help you monitor and manage your Spring Boot application. Spring Boot Actuator is essential for understanding the state of your application running in production.</p>
+<h3 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Health Checks:</strong> Actuator includes a health indicator feature that shows application health information. It can be extended to show application-specific health data.</li>
+<li><strong>Metrics Collection:</strong> It gathers and reports various metrics such as HTTP requests, database calls, and more, allowing for performance analysis.</li>
+<li><strong>Application Info:</strong> Display general information about the application, such as Git commit information, build information, and more.</li>
+<li><strong>Custom Endpoints:</strong> You can create custom endpoints to expose specific functionalities or information about your application.</li>
+<li><strong>Environment Details:</strong> Provides details about the application's environment, including configuration properties, system properties, environment variables, and more.</li>
+</ul>
+<h3 id="enabling-spring-boot-actuator">Enabling Spring Boot Actuator<a class="headerlink" href="#enabling-spring-boot-actuator" title="Permanent link">&para;</a></h3>
+<p>To use Spring Boot Actuator, you need to add its dependency to your Spring Boot project. If you are using Maven, include the following in your <code>pom.xml</code>:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div>
+<p>For Gradle, add this to your <code>build.gradle</code>:</p>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;org.springframework.boot:spring-boot-starter-actuator&#39;</span>
+</span></code></pre></div>
+<h3 id="accessing-actuator-endpoints">Accessing Actuator Endpoints<a class="headerlink" href="#accessing-actuator-endpoints" title="Permanent link">&para;</a></h3>
+<p>Once the dependency is added, Actuator endpoints can be accessed via HTTP or JMX. Many endpoints are available, such as <code>/actuator/health</code> for health checks and <code>/actuator/metrics</code> for metrics collection.</p>
+<p>Here's an example of accessing the health endpoint:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>http://localhost:8080/actuator/health
+</span></code></pre></div>
+<p>This command returns the health status of your application.</p>
+<h3 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h3>
+<p>Actuator endpoints can expose sensitive information about your application. It is crucial to secure these endpoints, especially in production. Spring Boot allows you to restrict access to these endpoints using Spring Security.</p>
+<p>Spring Boot Actuator is a powerful tool for monitoring and managing your Spring Boot applications. It provides insights into the application's performance, health status, and more, facilitating better operational and development practices.</p>
+<h3 id="adding-spring-boot-actuator">Adding Spring Boot Actuator<a class="headerlink" href="#adding-spring-boot-actuator" title="Permanent link">&para;</a></h3>
+<h4 id="step-1-include-actuator-dependency">Step 1: Include Actuator Dependency<a class="headerlink" href="#step-1-include-actuator-dependency" title="Permanent link">&para;</a></h4>
+<p>To integrate Spring Boot Actuator into your Spring Boot application, you must first add the Actuator starter dependency to your project's build configuration file. This can be done using Maven or Gradle, the two most common build tools for Java projects.</p>
+<ul>
+<li><strong>For Maven:</strong></li>
+</ul>
+<p>Add the following dependency to your <code>pom.xml</code>:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div>
+<ul>
+<li><strong>For Gradle:</strong></li>
+</ul>
+<p>Include this dependency in your <code>build.gradle</code>:</p>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;org.springframework.boot:spring-boot-starter-actuator&#39;</span>
+</span></code></pre></div>
+<h4 id="step-2-configure-actuator-endpoints-optional">Step 2: Configure Actuator Endpoints (Optional)<a class="headerlink" href="#step-2-configure-actuator-endpoints-optional" title="Permanent link">&para;</a></h4>
+<p>By default, Spring Boot Actuator exposes several endpoints, but you might want to enable additional endpoints or customize their security settings.</p>
+<p>In your <code>application.properties</code> or <code>application.yml</code>, you can configure the endpoints. For example, to enable all endpoints, you could add:</p>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="na">management.endpoints.web.exposure.include</span><span class="o">=</span><span class="s">*</span>
+</span></code></pre></div>
+<p>Be cautious with exposing all endpoints, as some can reveal sensitive information about your application. Always consider the security implications, especially in production environments.</p>
+<h4 id="step-3-accessing-actuator-endpoints">Step 3: Accessing Actuator Endpoints<a class="headerlink" href="#step-3-accessing-actuator-endpoints" title="Permanent link">&para;</a></h4>
+<p>After adding the dependency (and optionally configuring the endpoints), you can access them via HTTP. For example, to check the health of your application, you might use:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>http://localhost:8080/actuator/health
+</span></code></pre></div>
+<p>This command accesses the health endpoint, providing basic application health information.</p>
+<h4 id="step-4-secure-actuator-endpoints">Step 4: Secure Actuator Endpoints<a class="headerlink" href="#step-4-secure-actuator-endpoints" title="Permanent link">&para;</a></h4>
+<p>It's crucial to secure your Actuator endpoints, especially if you enable sensitive ones. You can use Spring Security to restrict access to these endpoints. For example, you might configure HTTP basic authentication or integrate with OAuth2 for more robust security.</p>
+<p>To secure endpoints with basic authentication, include the Spring Security dependency in your project and configure authentication in your security configuration class.</p>
+<p>Integrating Spring Boot Actuator into your application provides valuable insights and management capabilities. It's straightforward to add with just a dependency and some optional configuration. Remember to secure your endpoints, particularly when deploying your application to a production environment, to protect sensitive information.</p>
+<hr />
+<h2 id="commonly-used-spring-boot-actuator-endpoints">Commonly Used Spring Boot Actuator Endpoints<a class="headerlink" href="#commonly-used-spring-boot-actuator-endpoints" title="Permanent link">&para;</a></h2>
+<p>Spring Boot Actuator provides a wide range of endpoints that offer various insights and management capabilities for your application. Below are some of the most commonly used endpoints and their purposes:</p>
+<h3 id="1-actuatorhealth">1. <code>/actuator/health</code><a class="headerlink" href="#1-actuatorhealth" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Shows application health information. It provides a simple status (UP, DOWN, OUT_OF_SERVICE, UNKNOWN) to indicate if the application is running correctly. Can be extended to include checks for database connectivity, disk space, and custom health indicators.</li>
+</ul>
+<h3 id="2-actuatorinfo">2. <code>/actuator/info</code><a class="headerlink" href="#2-actuatorinfo" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Displays arbitrary application information. This can include build version, description, and custom info contributors. It's often used to show application version at runtime, which can be helpful for debugging or audit purposes.</li>
+</ul>
+<h3 id="3-actuatormetrics">3. <code>/actuator/metrics</code><a class="headerlink" href="#3-actuatormetrics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Provides detailed metrics about the application. This endpoint can expose various system and application metrics such as JVM memory usage, system CPU usage, and custom metrics. It's invaluable for monitoring application performance and troubleshooting.</li>
+</ul>
+<h3 id="4-actuatorenv">4. <code>/actuator/env</code><a class="headerlink" href="#4-actuatorenv" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Accesses the application's environment properties, including system properties, environment variables, configuration properties, and more. It's useful for debugging configuration issues and understanding the application's runtime environment.</li>
+</ul>
+<h3 id="5-actuatorloggers">5. <code>/actuator/loggers</code><a class="headerlink" href="#5-actuatorloggers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Allows viewing and modifying the logging level of application loggers. This endpoint is crucial for dynamically adjusting log levels to capture more detailed logs for troubleshooting without restarting the application.</li>
+</ul>
+<h3 id="6-actuatorthreaddump">6. <code>/actuator/threaddump</code><a class="headerlink" href="#6-actuatorthreaddump" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Provides a dump of all threads in the application's JVM. It's a critical tool for diagnosing deadlock situations or understanding what the application is doing at a granular level.</li>
+</ul>
+<h3 id="7-actuatorheapdump">7. <code>/actuator/heapdump</code><a class="headerlink" href="#7-actuatorheapdump" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Downloads a heap dump of the application’s JVM. Useful for analyzing memory usage and finding memory leaks. Note: This endpoint may not be enabled by default due to its potential impact on application performance.</li>
+</ul>
+<h3 id="8-actuatorauditevents">8. <code>/actuator/auditevents</code><a class="headerlink" href="#8-actuatorauditevents" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> Shows audit events information. This includes security-related events like login success and failure, which can be used for auditing and monitoring security aspects of the application.</li>
+</ul>
+<h3 id="security-considerations_1">Security Considerations<a class="headerlink" href="#security-considerations_1" title="Permanent link">&para;</a></h3>
+<p>While these endpoints provide valuable insights, they can also expose sensitive information about your application. Therefore, it's crucial to secure them, typically by limiting their exposure to authenticated users or by restricting access to specific IP addresses or networks.</p>
+<h3 id="customizing-endpoint-exposure">Customizing Endpoint Exposure<a class="headerlink" href="#customizing-endpoint-exposure" title="Permanent link">&para;</a></h3>
+<p>You can control which endpoints are exposed and through which medium (HTTP, JMX) by configuring the <code>management.endpoints.web.exposure.include</code> and <code>management.endpoints.web.exposure.exclude</code> properties in your <code>application.properties</code> or <code>application.yml</code>.</p>
+<h3 id="extending-actuators-capabilities">Extending Actuator’s Capabilities<a class="headerlink" href="#extending-actuators-capabilities" title="Permanent link">&para;</a></h3>
+<p>Beyond utilizing the commonly used endpoints, you can extend Spring Boot Actuator's capabilities in several ways to fit your specific needs:</p>
+<h3 id="creating-custom-endpoints">Creating Custom Endpoints<a class="headerlink" href="#creating-custom-endpoints" title="Permanent link">&para;</a></h3>
+<p>Spring Boot Actuator allows for the creation of custom endpoints. This feature can be particularly useful when you need to expose application-specific information or functionality through an Actuator-like interface. Custom endpoints can be created by implementing the <code>Endpoint</code> interface or, more commonly, by annotating a class with <code>@Endpoint</code>, <code>@ReadOperation</code>, <code>@WriteOperation</code>, or <code>@DeleteOperation</code> annotations depending on the type of operations you want to support.</p>
+<h3 id="customizing-health-indicators">Customizing Health Indicators<a class="headerlink" href="#customizing-health-indicators" title="Permanent link">&para;</a></h3>
+<p>While the <code>/actuator/health</code> endpoint provides basic health status, you can customize or add new health indicators to reflect the health status of other application components or external systems your application depends on. This is done by implementing the <code>HealthIndicator</code> interface and defining the health check logic that is relevant to your application.</p>
+<h3 id="integrating-with-external-monitoring-systems">Integrating with External Monitoring Systems<a class="headerlink" href="#integrating-with-external-monitoring-systems" title="Permanent link">&para;</a></h3>
+<p>Spring Boot Actuator’s metrics can be easily integrated with external monitoring systems like Prometheus, Grafana, or DataDog. This is facilitated through the Micrometer library, which Spring Boot Actuator uses for its metrics. Micrometer acts as a facade for various monitoring systems, allowing you to export metrics to your preferred monitoring solution with minimal configuration.</p>
+<h3 id="securing-actuator-endpoints">Securing Actuator Endpoints<a class="headerlink" href="#securing-actuator-endpoints" title="Permanent link">&para;</a></h3>
+<p>Security is a critical aspect of using Spring Boot Actuator, especially when deploying applications to production. Spring Security can be integrated to protect Actuator endpoints through authentication and authorization. For example, you might restrict sensitive endpoints to only be accessible by users with specific roles or permissions. Spring Boot also allows configuring endpoint security at a granular level, enabling different security requirements for different endpoints.</p>
+<h3 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Limit Exposure:</strong> Only expose necessary endpoints and secure them appropriately. Use properties to include or exclude specific endpoints from being exposed over the web.</li>
+<li><strong>Monitor Access:</strong> Keep an eye on the access logs for Actuator endpoints, particularly in production, to detect any unauthorized access attempts.</li>
+<li><strong>Regularly Update Dependencies:</strong> Ensure that you are using the latest version of Spring Boot and Actuator to take advantage of security patches and new features.</li>
+<li><strong>Use HTTPS:</strong> When exposing endpoints over the web, ensure that your application is configured to use HTTPS to encrypt the data in transit.</li>
+</ul>
+<hr />
+<h2 id="including-or-excluding-actuator-endpoints">Including or Excluding Actuator Endpoints<a class="headerlink" href="#including-or-excluding-actuator-endpoints" title="Permanent link">&para;</a></h2>
+<p>Controlling the exposure of Spring Boot Actuator endpoints is crucial for both security and performance. Spring Boot provides a straightforward way to include or exclude specific endpoints from being exposed. This can be done through properties in <code>application.properties</code> or <code>application.yml</code> configuration files.</p>
+<h4 id="using-applicationproperties">Using <code>application.properties</code><a class="headerlink" href="#using-applicationproperties" title="Permanent link">&para;</a></h4>
+<p>To include or exclude specific Actuator endpoints in your <code>application.properties</code>, you can use the following properties:</p>
+<ul>
+<li><strong>To Include Specific Endpoints:</strong></li>
+</ul>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="na">management.endpoints.web.exposure.include</span><span class="o">=</span><span class="s">health,info</span>
+</span></code></pre></div>
+<p>This configuration will expose only the <code>health</code> and <code>info</code> endpoints. All other endpoints will not be accessible.</p>
+<ul>
+<li><strong>To Exclude Specific Endpoints:</strong></li>
+</ul>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="na">management.endpoints.web.exposure.exclude</span><span class="o">=</span><span class="s">env,beans</span>
+</span></code></pre></div>
+<p>This configuration will prevent the <code>env</code> and <code>beans</code> endpoints from being exposed, while all other endpoints will be available by default.</p>
+<h4 id="using-applicationyml">Using <code>application.yml</code><a class="headerlink" href="#using-applicationyml" title="Permanent link">&para;</a></h4>
+<p>Alternatively, if you prefer using <code>application.yml</code> for configuration, the syntax would be slightly different:</p>
+<ul>
+<li><strong>To Include Specific Endpoints:</strong></li>
+</ul>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">management</span><span class="p">:</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">      </span><span class="nt">exposure</span><span class="p">:</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">health,info</span>
+</span></code></pre></div>
+<ul>
+<li><strong>To Exclude Specific Endpoints:</strong></li>
+</ul>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">management</span><span class="p">:</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">web</span><span class="p">:</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">exposure</span><span class="p">:</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">env,beans</span>
+</span></code></pre></div>
+<h4 id="combining-include-and-exclude">Combining Include and Exclude<a class="headerlink" href="#combining-include-and-exclude" title="Permanent link">&para;</a></h4>
+<p>When both <code>include</code> and <code>exclude</code> properties are specified, <code>exclude</code> takes precedence. This means that if an endpoint is listed in both include and exclude, it will not be exposed.</p>
+<h4 id="fine-grained-exposure-control">Fine-Grained Exposure Control<a class="headerlink" href="#fine-grained-exposure-control" title="Permanent link">&para;</a></h4>
+<p>Spring Boot Actuator also allows for more granular control over endpoint exposure:</p>
+<ul>
+<li><strong>Expose All Endpoints:</strong></li>
+</ul>
+<p>To expose all available endpoints:</p>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="na">management.endpoints.web.exposure.include</span><span class="o">=</span><span class="s">*</span>
+</span></code></pre></div>
+<ul>
+<li><strong>Combining Wildcards and Specific Exclusions:</strong></li>
+</ul>
+<p>You can combine wildcard inclusion with specific exclusions for more fine-grained control:</p>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="na">management.endpoints.web.exposure.include</span><span class="o">=</span><span class="s">*</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="na">management.endpoints.web.exposure.exclude</span><span class="o">=</span><span class="s">env,beans</span>
+</span></code></pre></div>
+<p>This setup exposes all endpoints except for <code>env</code> and <code>beans</code>.</p>
+<h4 id="security-considerations_2">Security Considerations<a class="headerlink" href="#security-considerations_2" title="Permanent link">&para;</a></h4>
+<p>While exposing endpoints can provide valuable insights and management capabilities, it's essential to consider the security implications. Always ensure that sensitive endpoints, especially those that can alter state or provide detailed application internals (like <code>env</code>, <code>heapdump</code>), are protected appropriately, typically through Spring Security.</p>
+<p>Configuring which Actuator endpoints are exposed or hidden is a straightforward process in Spring Boot, offering flexibility to balance between transparency, functionality, and security. Properly managing endpoint exposure is a key part of maintaining a secure and efficient production environment for your Spring Boot applications.</p>
+<hr />
+<h2 id="integrating-with-external-monitoring-systems_1">Integrating with External Monitoring Systems<a class="headerlink" href="#integrating-with-external-monitoring-systems_1" title="Permanent link">&para;</a></h2>
+<p>Spring Boot Actuator's metrics feature can be seamlessly integrated with external monitoring systems such as Prometheus and Grafana, providing a powerful toolset for observing and understanding the behavior of your application in real-time. This integration is facilitated through the Micrometer library, which Spring Boot uses for its metrics collection. Micrometer acts as an instrumentation facade, offering a vendor-neutral interface for collecting metrics, which can then be exported to various monitoring systems.</p>
+<h4 id="integration-with-prometheus">Integration with Prometheus<a class="headerlink" href="#integration-with-prometheus" title="Permanent link">&para;</a></h4>
+<p>Prometheus is a popular open-source monitoring and alerting toolkit that is particularly well-suited for collecting time-series data. Here’s how you can integrate Spring Boot Actuator with Prometheus:</p>
+<ol>
+<li><strong>Add Prometheus Dependency:</strong></li>
+</ol>
+<p>First, add the Micrometer Prometheus registry dependency to your project. For Maven, include this in your <code>pom.xml</code>:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.micrometer<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>micrometer-registry-prometheus<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">&lt;version&gt;</span>latest.version<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div>
+<p>For Gradle, add this to your <code>build.gradle</code>:</p>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;io.micrometer:micrometer-registry-prometheus:latest.version&#39;</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Configure Actuator to Expose Prometheus Endpoint:</strong></li>
+</ol>
+<p>Ensure that your <code>application.properties</code> or <code>application.yml</code> includes the Actuator Prometheus endpoint:</p>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="na">management.endpoints.web.exposure.include</span><span class="o">=</span><span class="s">prometheus</span>
+</span></code></pre></div>
+<p>This configuration exposes the <code>/actuator/prometheus</code> endpoint, which Prometheus can scrape to collect metrics.</p>
+<ol>
+<li><strong>Configure Prometheus to Scrape Your Application:</strong></li>
+</ol>
+<p>You'll need to configure Prometheus to scrape metrics from your application. This is typically done in the Prometheus configuration file (<code>prometheus.yml</code>), where you add your application as a target:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">scrape_configs</span><span class="p">:</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spring-application&#39;</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/actuator/prometheus&#39;</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;localhost:8080&#39;</span><span class="p p-Indicator">]</span>
+</span></code></pre></div>
+<h4 id="visualization-with-grafana">Visualization with Grafana<a class="headerlink" href="#visualization-with-grafana" title="Permanent link">&para;</a></h4>
+<p>Grafana is a popular open-source platform for monitoring and observability that integrates well with Prometheus, allowing you to visualize your metrics through dashboards. Here’s how to visualize your Spring Boot metrics in Grafana:</p>
+<ol>
+<li><strong>Set Up Grafana and Add Prometheus as a Data Source:</strong></li>
+</ol>
+<p>After installing Grafana, add Prometheus as a data source through the Grafana UI by providing the URL to your Prometheus server.</p>
+<ol>
+<li><strong>Create or Import Dashboards:</strong></li>
+</ol>
+<p>You can create custom dashboards in Grafana or import existing ones. The Grafana community has many pre-built dashboards for visualizing metrics from Prometheus, including dashboards specifically designed for Spring Boot applications.</p>
+<ol>
+<li><strong>Visualize Your Application Metrics:</strong></li>
+</ol>
+<p>Once your dashboard is set up, you can start visualizing the metrics collected from your Spring Boot application. This can include JVM metrics, application throughput, response times, and custom application metrics.</p>
+<hr />
+<h2 id="strategies-for-scaling-monitoring-in-microservices">Strategies for Scaling Monitoring in Microservices<a class="headerlink" href="#strategies-for-scaling-monitoring-in-microservices" title="Permanent link">&para;</a></h2>
+<p>In a microservices architecture, effectively monitoring applications becomes challenging due to the distributed nature of services. Spring Boot Actuator, when used in conjunction with other tools and practices, can facilitate comprehensive and scalable monitoring solutions. Here are some strategies to consider:</p>
+<h4 id="1-centralized-logging">1. Centralized Logging<a class="headerlink" href="#1-centralized-logging" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Use Centralized Log Management:</strong> Tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Fluentd can aggregate logs from multiple services in a centralized location. Spring Boot applications can be configured to send logs to these tools, making it easier to search and analyze logs across services.</li>
+</ul>
+<h4 id="2-distributed-tracing">2. Distributed Tracing<a class="headerlink" href="#2-distributed-tracing" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Implement Distributed Tracing:</strong> Solutions like Zipkin, Jaeger, or Spring Cloud Sleuth can be integrated with Spring Boot applications to track requests across service boundaries. This helps in understanding the flow of requests and identifying bottlenecks or failures in the system.</li>
+</ul>
+<h4 id="3-metrics-aggregation">3. Metrics Aggregation<a class="headerlink" href="#3-metrics-aggregation" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Aggregate Metrics:</strong> Use Prometheus with Micrometer in Spring Boot to collect and aggregate metrics from all microservices. Prometheus can scrape metrics exposed by the Actuator <code>/actuator/prometheus</code> endpoint of each service.</li>
+</ul>
+<h4 id="4-dynamic-service-discovery-for-monitoring">4. Dynamic Service Discovery for Monitoring<a class="headerlink" href="#4-dynamic-service-discovery-for-monitoring" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Leverage Service Discovery:</strong> In a microservices architecture, services can dynamically scale in and out. Integrating your monitoring tools with service discovery mechanisms (like Eureka, Consul, or Kubernetes services) ensures that your monitoring setup automatically adjusts to the changing landscape of your services.</li>
+</ul>
+<h4 id="5-unified-dashboard-for-metrics-visualization">5. Unified Dashboard for Metrics Visualization<a class="headerlink" href="#5-unified-dashboard-for-metrics-visualization" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Use Grafana for Unified Dashboards:</strong> Grafana can connect to multiple data sources, including Prometheus, to create comprehensive dashboards that visualize metrics from all your microservices. This unified view is crucial for monitoring the health and performance of the entire system.</li>
+</ul>
+<h4 id="6-health-check-aggregation">6. Health Check Aggregation<a class="headerlink" href="#6-health-check-aggregation" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Aggregate Health Checks:</strong> Tools like Spring Boot Admin can aggregate health indicators from the <code>/actuator/health</code> endpoint of each microservice, providing a holistic view of the system’s health. This can be crucial for quickly identifying and addressing issues in a specific service.</li>
+</ul>
+<h4 id="7-alerting-and-notification">7. Alerting and Notification<a class="headerlink" href="#7-alerting-and-notification" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Configure Alerting:</strong> Integrate alerting tools with your monitoring setup to receive notifications about critical issues. Prometheus Alertmanager, integrated with communication platforms like Slack or email systems, can automate alerts based on specific metrics thresholds or service health status.</li>
+</ul>
+<h4 id="8-automate-response-mechanisms">8. Automate Response Mechanisms<a class="headerlink" href="#8-automate-response-mechanisms" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Automation for Scaling and Healing:</strong> Use Kubernetes or other orchestration tools to automatically scale services based on metrics thresholds or to perform self-healing actions in response to health check failures.</li>
+</ul>
+<h4 id="9-security-and-access-management">9. Security and Access Management<a class="headerlink" href="#9-security-and-access-management" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Secure Monitoring Tools:</strong> Ensure that access to monitoring tools and data is secured and managed, given the sensitive nature of the information they hold. Implement access controls and audit logs to monitor who accesses the monitoring data.</li>
+</ul>
+<h4 id="10-regular-review-and-optimization">10. Regular Review and Optimization<a class="headerlink" href="#10-regular-review-and-optimization" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Continuously Optimize Monitoring Setup:</strong> Regularly review your monitoring strategies and configurations to ensure they are aligned with the evolving architecture and business requirements. This includes optimizing alert thresholds, updating dashboards, and refining log aggregation policies.</li>
+</ul>
+<p>Effective monitoring in a microservices architecture requires a combination of tools, practices, and strategies that work together to provide a comprehensive view of the system’s health and performance. By leveraging Spring Boot Actuator in conjunction with centralized logging, distributed tracing, metrics aggregation, and dynamic service discovery, teams can create a scalable and resilient monitoring solution that supports the complexity and dynamism of microservices-based applications.</p>
+<hr />
+<hr />
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.highlight", "search.suggest", "navigation.path", "navigation.top", "content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", {"palette": [{"media": "(prefers-color-scheme)", "toggle": {"icon": "material/link", "name": "Switch to light mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: light)", "primary": "indigo", "scheme": "default", "toggle": {"icon": "material/toggle-switch", "name": "Switch to dark mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: dark)", "primary": "black", "scheme": "slate", "toggle": {"icon": "material/toggle-switch-off", "name": "Switch to system preference"}}]}], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4842 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://interview-notes.com/nodejs/eventloop/">
+      
+      
+        <link rel="prev" href="../module/">
+      
+      
+        <link rel="next" href="../express/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Event Loop - Interview Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#event-loop" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Interview Notes" class="md-header__button md-logo" aria-label="Interview Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Interview Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Event Loop
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../java/" class="md-tabs__link">
+          
+  
+    
+  
+  Languages
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../spring/" class="md-tabs__link">
+          
+  
+    
+  
+  Web Development
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mq/kafka/" class="md-tabs__link">
+          
+  
+    
+  
+  MQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../devops/" class="md-tabs__link">
+          
+  
+    
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../db/" class="md-tabs__link">
+          
+  
+    
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+    
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../design-pattern/" class="md-tabs__link">
+          
+  
+    
+  
+  Design Pattern
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ds-algo/" class="md-tabs__link">
+          
+  
+    
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../qa/" class="md-tabs__link">
+          
+  
+    
+  
+  QA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../misc/agile/" class="md-tabs__link">
+          
+  
+    
+  
+  Misc
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tags/" class="md-tabs__link">
+        
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Interview Notes" class="md-nav__button md-logo" aria-label="Interview Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Interview Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Languages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Languages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../java/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/java8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 8
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/FunctionalInterface/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Functional Interface
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Node.js
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Node.js
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../module/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Event Loop
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Event Loop
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#event-loop_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Phases:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Queue:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-execution-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Execution Flow:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-the-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of the Event Loop:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Example:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-customization-and-additional-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Customization and Additional Considerations:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microtasks-and-macrotasks-in-the-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microtasks and Macrotasks in the Event Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microtasks and Macrotasks in the Event Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-macrotasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Macrotasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-microtasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Microtasks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settimeout-and-setimmediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      setTimeout and setImmediate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="setTimeout and setImmediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settimeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      setTimeout:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setimmediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      setImmediate:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processnexttick" class="md-nav__link">
+    <span class="md-ellipsis">
+      process.nextTick()
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="process.nextTick()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose-of-processnexttick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose of process.nextTick():
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effect-on-the-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effect on the Event Loop:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases-for-processnexttick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases for process.nextTick():
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prevent-the-event-loop-from-blocking-the-main-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prevent the event loop from blocking the main thread
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worker-threads-and-child-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Threads and Child Processes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-driven-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event-Driven Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event-Driven Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-event-driven-architecture-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Event-Driven Architecture Works:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantages-of-event-driven-architecture-in-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages of Event-Driven Architecture in Node.js:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../express/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Express.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../python/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../golang/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Golang
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Golang
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Web Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Web Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../spring/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/security/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/security/annotations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Annotations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/security/filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security Filters 
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/springboot/spring-boot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/springboot/springboot-actuator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot Actuator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-mvc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring MVC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/transaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Transaction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/webFlux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring WebFlux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../microservices/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Microservices
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Microservices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../microservices/solid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SOLID
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../angular/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Angular
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Angular
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../javascript/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Javascript
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Javascript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../typescript/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    TypeScript
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            TypeScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../react/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            React
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lifecycle Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/react-component/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Component
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/enzyme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enzyme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/eslint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESLint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/react-router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Router
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/redux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/redux-thunk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux Thunk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/rest-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../react/nextjs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../html/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    HTML
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            HTML
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../css/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CSS
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            CSS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/kafka/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache Kafka
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/rebbitmq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/activemq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache ActiveMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/sqs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Amazon SQS (Simple Queue Service)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/servicebus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microsoft Azure sqs.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/pubsub/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Cloud Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mq/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../devops/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            DevOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/aws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/azure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/gcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cloud/openshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenShift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/vcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VCS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization and Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/iac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure as Code (IaC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Monitoring and Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Container Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/scanning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scanning and Compliance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/artifact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifact Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/gitops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../db/" class="md-nav__link ">
+              
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/cassandra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cassandra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/couchbase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Couchbase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/dynamoDB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DynamoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/mongodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MongoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/oracle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Oracle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/postgreSql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PostgreSql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../design-pattern/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Design Pattern
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Design Pattern
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/behavioral-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Behavioral Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/creational-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creational Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/structural-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structural Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design-pattern/other-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ds-algo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds-algo/algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../qa/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    QA
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            QA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/cucumber/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/selenium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selenium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/protractor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protractor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/cypress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cypress
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/website/webdriverIO/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebdriverIO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apigee
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/mocha-chai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mocha/Chai
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/karate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    karate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/postman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    postman
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/rest-assured/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest Assured
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/microservices/testng/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestNG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/mobile/appium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/mobile/robot-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Robot Framework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qa/jmeter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JMeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/agile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agile methodology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/security-scan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scan Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/production-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Production Support Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tags
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#event-loop_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Phases:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Queue:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-execution-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Execution Flow:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-the-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of the Event Loop:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Example:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-loop-customization-and-additional-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Loop Customization and Additional Considerations:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microtasks-and-macrotasks-in-the-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microtasks and Macrotasks in the Event Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microtasks and Macrotasks in the Event Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-macrotasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Macrotasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-microtasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Microtasks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settimeout-and-setimmediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      setTimeout and setImmediate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="setTimeout and setImmediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settimeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      setTimeout:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setimmediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      setImmediate:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processnexttick" class="md-nav__link">
+    <span class="md-ellipsis">
+      process.nextTick()
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="process.nextTick()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose-of-processnexttick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose of process.nextTick():
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effect-on-the-event-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effect on the Event Loop:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases-for-processnexttick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases for process.nextTick():
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prevent-the-event-loop-from-blocking-the-main-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prevent the event loop from blocking the main thread
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worker-threads-and-child-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Threads and Child Processes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-driven-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event-Driven Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event-Driven Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-event-driven-architecture-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Event-Driven Architecture Works:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantages-of-event-driven-architecture-in-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages of Event-Driven Architecture in Node.js:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+<nav class="md-tags" hidden>
+  
+    
+    
+    
+      <a href="../../tags/#event-loop" class="md-tag">Event Loop</a>
+    
+  
+    
+    
+    
+      <a href="../../tags/#event-driven-architecture" class="md-tag">Event-Driven Architecture</a>
+    
+  
+</nav>
+
+
+
+<h1 id="event-loop">Event Loop<a class="headerlink" href="#event-loop" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="event-loop_1">Event Loop<a class="headerlink" href="#event-loop_1" title="Permanent link">&para;</a></h2>
+<p>The event loop in Node.js is a crucial part of its architecture, allowing it to handle asynchronous operations
+efficiently. It's a continuous process that constantly checks the message queue for events, executes callbacks, and
+manages I/O operations without blocking the main thread. This enables Node.js to be highly performant and handle
+numerous connections simultaneously.</p>
+<p>The event loop is a core concept in Node.js, responsible for its non-blocking, asynchronous behavior. It's essential to
+understand how the event loop works to harness the full power of Node.js for building scalable and high-performance
+applications.</p>
+<h3 id="key-concepts">Key Concepts:<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Single-Threaded:</strong> Node.js operates on a single-threaded event loop model. This means that it runs all JavaScript
+   code in a single main thread. However, it can still handle numerous connections and perform I/O operations
+   efficiently because of its non-blocking nature.</p>
+</li>
+<li>
+<p><strong>Event-Driven:</strong> Node.js is event-driven, meaning it responds to events like incoming HTTP requests, file system
+   operations, and timers. These events trigger the execution of specific callback functions.</p>
+</li>
+</ol>
+<h3 id="event-loop-phases">Event Loop Phases:<a class="headerlink" href="#event-loop-phases" title="Permanent link">&para;</a></h3>
+<p>The event loop in Node.js consists of several phases, each responsible for handling different types of events. These
+phases ensure that asynchronous operations are executed in an organized and efficient manner. Here's an overview of the
+main phases:</p>
+<ol>
+<li>
+<p><strong>Timers:</strong> In this phase, the event loop checks for timers that have expired. Timers are created using functions
+   like <code>setTimeout()</code> and <code>setInterval()</code>. If a timer has expired, its callback function is pushed to the message queue
+   for execution.</p>
+</li>
+<li>
+<p><strong>Pending I/O Callbacks:</strong> This phase handles I/O-related callbacks. When an asynchronous I/O operation, such as
+   reading a file or making a network request, is completed, its callback is placed in the message queue for execution
+   in this phase.</p>
+</li>
+<li>
+<p><strong>Idle, Prepare:</strong> These are internal phases used for housekeeping and preparation work. They are rarely used
+   directly by developers.</p>
+</li>
+<li>
+<p><strong>Poll:</strong> In the poll phase, the event loop waits for events to occur. If there are no timers or pending I/O
+   operations, it can block and wait for new events. This is where most of the asynchronous I/O operations take place.</p>
+</li>
+<li>
+<p><strong>Check, Close Callbacks:</strong> In the check phase, certain callbacks are executed immediately after the poll phase,
+   primarily to handle setImmediate() callbacks. The close callbacks phase deals with close events like closing a socket
+   or a file.</p>
+</li>
+</ol>
+<h3 id="message-queue">Message Queue:<a class="headerlink" href="#message-queue" title="Permanent link">&para;</a></h3>
+<p>The message queue is a critical part of the event loop. When an event or callback is ready to be executed, it is placed
+in the message queue. The event loop constantly checks the message queue and processes these events one by one. This
+ensures that callbacks are executed in the order they were added to the queue.</p>
+<h3 id="event-loop-execution-flow">Event Loop Execution Flow:<a class="headerlink" href="#event-loop-execution-flow" title="Permanent link">&para;</a></h3>
+<p>Here's a simplified overview of how the event loop works:</p>
+<ol>
+<li>
+<p>The event loop starts in the "poll" phase, waiting for events to occur.</p>
+</li>
+<li>
+<p>When an event, such as an incoming HTTP request, occurs, Node.js triggers the associated callback function.</p>
+</li>
+<li>
+<p>The callback function is executed asynchronously and may perform I/O operations or other tasks.</p>
+</li>
+<li>
+<p>Upon completion of the callback, it is placed in the message queue.</p>
+</li>
+<li>
+<p>The event loop checks the message queue and executes the callbacks one by one, starting with the next available
+   callback.</p>
+</li>
+<li>
+<p>This process continues, allowing Node.js to efficiently handle multiple connections and asynchronous tasks without
+   blocking the main thread.</p>
+</li>
+</ol>
+<h3 id="benefits-of-the-event-loop">Benefits of the Event Loop:<a class="headerlink" href="#benefits-of-the-event-loop" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Non-blocking:</strong> The event loop allows Node.js to perform I/O operations without blocking the main thread, ensuring
+  that your application remains responsive to other requests and events.</p>
+</li>
+<li>
+<p><strong>Scalability:</strong> Node.js can handle a large number of concurrent connections and events efficiently, making it
+  suitable for building scalable applications.</p>
+</li>
+<li>
+<p><strong>High Performance:</strong> By utilizing the event loop, Node.js can execute callbacks quickly, resulting in high
+  performance for real-time applications like chat applications and online games.</p>
+</li>
+<li>
+<p><strong>Resource Efficiency:</strong> Node.js consumes fewer resources compared to traditional multi-threaded models, making it
+  more resource-efficient.</p>
+</li>
+</ul>
+<p>In summary, the event loop is the heart of Node.js, enabling it to handle asynchronous operations efficiently. By
+understanding its phases and how it processes events, developers can write non-blocking, high-performance applications
+that can handle a large number of concurrent connections.</p>
+<h3 id="event-loop-example">Event Loop Example:<a class="headerlink" href="#event-loop-example" title="Permanent link">&para;</a></h3>
+<p>To better illustrate how the event loop works in practice, let's consider a simple example involving timers and I/O
+operations:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Example 1: Timers</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Start&#39;</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Timer 1 (setTimeout) fired&#39;</span><span class="p">);</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nx">setImmediate</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Immediate 1 (setImmediate) fired&#39;</span><span class="p">);</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">});</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;End&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>In this example, we have two timers, one created using <code>setTimeout()</code> and the other using <code>setImmediate()</code>. Here's the
+expected output and explanation:</p>
+<ol>
+<li>The code begins executing, and 'Start' is logged to the console.</li>
+<li>The <code>setTimeout()</code> timer is set to fire after 1000 milliseconds (1 second), and the <code>setImmediate()</code> callback is set
+   to execute immediately after the current phase (in this case, the poll phase).</li>
+<li>'End' is logged to the console.</li>
+<li>The event loop enters the poll phase and waits for events to occur.</li>
+<li>After approximately 1 second, the event loop detects that the <code>setTimeout()</code> timer has expired. Its callback is
+   placed in the message queue.</li>
+<li>The event loop finishes the poll phase and checks the message queue. It finds the <code>setTimeout()</code> callback and
+   executes it, logging 'Timer 1 (setTimeout) fired'.</li>
+<li>Finally, the event loop processes the <code>setImmediate()</code> callback, logging 'Immediate 1 (setImmediate) fired'.</li>
+</ol>
+<p>This example demonstrates the order of execution in the event loop, emphasizing that timers are not guaranteed to
+execute immediately when their time expires. The event loop schedules callbacks based on the phases and their priority.</p>
+<p>Let's explore another example involving I/O operations:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// Example 2: I/O Operations</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Start&#39;</span><span class="p">);</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">&#39;example.txt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error reading file:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">);</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;File content:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">});</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;End&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>In this example, we read the contents of a file asynchronously using <code>fs.readFile()</code>. Here's the expected output and
+explanation:</p>
+<ol>
+<li>The code starts executing, and 'Start' is logged to the console.</li>
+<li>The <code>fs.readFile()</code> function is called, initiating an asynchronous file reading operation. The callback function is
+   provided to handle the result when the operation completes.</li>
+<li>'End' is logged to the console.</li>
+<li>The event loop enters the poll phase and waits for events to occur, including the completion of the file reading
+   operation.</li>
+<li>When the file reading operation is finished, its callback function is placed in the message queue.</li>
+<li>The event loop checks the message queue and executes the file reading callback, either logging the file content or an
+   error message, depending on the outcome of the operation.</li>
+</ol>
+<p>This example demonstrates how the event loop efficiently manages I/O operations without blocking the main thread,
+ensuring that other tasks can continue to execute concurrently.</p>
+<p>Understanding the event loop and its phases is essential for Node.js developers, as it forms the basis for handling
+asynchronous operations and building responsive and high-performance applications.</p>
+<h3 id="event-loop-customization-and-additional-considerations">Event Loop Customization and Additional Considerations:<a class="headerlink" href="#event-loop-customization-and-additional-considerations" title="Permanent link">&para;</a></h3>
+<p>While the event loop in Node.js operates automatically, there are ways to customize its behavior and additional
+considerations to keep in mind:</p>
+<ol>
+<li>
+<p><strong>Event Loop Phases Customization:</strong> In some cases, you may want to customize the behavior of specific phases of the
+   event loop. Node.js provides methods like <code>process.nextTick()</code>, <code>setImmediate()</code>, and <code>setInterval()</code> to control when
+   certain tasks are executed. These can be useful for fine-tuning the order of execution of callbacks.</p>
+</li>
+<li>
+<p><strong>Blocking Code:</strong> Although Node.js is designed to be non-blocking, you should be cautious when using synchronous
+   code or CPU-intensive operations within your callbacks. Such code can block the event loop and affect the overall
+   performance of your application. Consider offloading CPU-intensive tasks to worker threads or child processes.</p>
+</li>
+<li>
+<p><strong>Memory Management:</strong> Asynchronous operations in Node.js can lead to memory leaks if not managed properly. It's
+   important to release resources and remove references to objects when they are no longer needed. Tools like the
+   built-in <code>EventEmitter</code> class can help manage event subscriptions and prevent memory leaks.</p>
+</li>
+<li>
+<p><strong>Error Handling:</strong> Proper error handling is crucial in asynchronous code. Always handle errors within your
+   callbacks, and consider using libraries like <code>async/await</code> or Promises to simplify error handling and avoid unhandled
+   exceptions.</p>
+</li>
+<li>
+<p><strong>Event Loop Lag:</strong> In high-traffic applications, the event loop can become congested, leading to event loop lag.
+   Monitor your application's performance and consider load balancing or scaling strategies to address this issue.</p>
+</li>
+<li>
+<p><strong>Concurrency and Thread Safety:</strong> While Node.js is single-threaded, it is designed to be concurrent. Ensure that
+   your code is thread-safe when sharing resources among multiple asynchronous operations. Proper synchronization
+   mechanisms may be necessary in certain scenarios.</p>
+</li>
+<li>
+<p><strong>Event Loop Debugging:</strong> Node.js provides built-in debugging tools and libraries like <code>async_hooks</code> for tracing and
+   debugging the event loop. Familiarize yourself with these tools to troubleshoot performance or concurrency issues.</p>
+</li>
+<li>
+<p><strong>Event Loop Libraries:</strong> Explore third-party libraries and tools designed to work with the event loop. Libraries
+   like <code>p-event</code> and <code>event-loop-inspector</code> can help manage event-driven code and provide insights into event loop
+   behavior.</p>
+</li>
+<li>
+<p><strong>Node.js Versions:</strong> Be aware of changes and improvements in different Node.js versions. Upgrade to newer versions
+   to benefit from performance enhancements, bug fixes, and security updates.</p>
+</li>
+</ol>
+<p>In conclusion, understanding the event loop in Node.js is essential for building efficient and scalable applications. It
+enables you to leverage asynchronous programming to handle I/O operations and concurrency effectively. By mastering the
+event loop and considering customization options and best practices, you can create robust and high-performance Node.js
+applications that can handle a wide range of tasks and workloads.</p>
+<hr />
+<h2 id="microtasks-and-macrotasks-in-the-event-loop">Microtasks and Macrotasks in the Event Loop<a class="headerlink" href="#microtasks-and-macrotasks-in-the-event-loop" title="Permanent link">&para;</a></h2>
+<p>In the context of the event loop in JavaScript, tasks can be categorized into two main types: microtasks and macrotasks.
+Understanding the difference between these two is essential for managing asynchronous code execution effectively.</p>
+<h3 id="1-macrotasks">1. Macrotasks<a class="headerlink" href="#1-macrotasks" title="Permanent link">&para;</a></h3>
+<p>Macrotasks are higher-level tasks or callbacks that are placed in the task queue and executed by the event loop. They
+typically include I/O operations, timers (e.g., setTimeout), and DOM events (e.g., click or fetch). Macrotasks are
+processed in discrete chunks of execution, and the event loop cycles through them in a sequential manner.</p>
+<p>For example, if you have code like this:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Timeout callback&#39;</span><span class="p">);</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">},</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>In this case, the <code>setTimeout</code> callback is a macrotask that will be executed after the current execution context is
+finished, even though it has a timeout of 0 milliseconds. So, "Hello" will be printed before "Timeout callback."</p>
+<h3 id="2-microtasks">2. Microtasks<a class="headerlink" href="#2-microtasks" title="Permanent link">&para;</a></h3>
+<p>Microtasks, on the other hand, are lower-level tasks that are executed immediately after the current execution context
+but before the event loop moves on to the next macrotask. They are often used for high-priority tasks that need to run
+as soon as possible. Microtasks include things like Promises (resolved or rejected), <code>process.nextTick</code>, and the
+MutationObserver API in the browser.</p>
+<p>For example, consider this code:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Start&#39;</span><span class="p">);</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Promise resolved&#39;</span><span class="p">);</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">});</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;End&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>In this case, "Start" and "End" are part of the main execution context. However, the microtask inside the
+Promise's <code>then</code> callback ("Promise resolved") will be executed before the event loop moves on to any other macrotasks.
+So, the output will be:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Start
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>End
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Promise resolved
+</span></code></pre></div>
+<p>In summary, macrotasks are higher-priority tasks that are processed sequentially by the event loop, while microtasks are
+lower-priority tasks that are executed immediately after the current execution context, before moving on to the next
+macrotask. Understanding this distinction is crucial for managing the order of execution in asynchronous JavaScript code
+and ensuring that high-priority tasks are handled appropriately.</p>
+<hr />
+<h2 id="settimeout-and-setimmediate"><code>setTimeout</code> and <code>setImmediate</code><a class="headerlink" href="#settimeout-and-setimmediate" title="Permanent link">&para;</a></h2>
+<p>Both <code>setTimeout</code> and <code>setImmediate</code> are used for scheduling code to run asynchronously in Node.js, but they have some
+differences in behavior and use cases. Let's explore the key differences and when you should use each of them:</p>
+<h3 id="settimeout"><code>setTimeout</code>:<a class="headerlink" href="#settimeout" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Timer-Based Delay:</strong> <code>setTimeout</code> is used to schedule a function to run after a specified delay, measured in
+   milliseconds. It allows you to introduce a delay before executing a callback function.</p>
+</li>
+<li>
+<p><strong>Execution Order:</strong> The callback scheduled with <code>setTimeout</code> is placed in the macrotask queue and is executed after
+   the current execution context has finished. This means it will not be immediate but will be delayed by at least the
+   specified time.</p>
+</li>
+<li>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>When you need to introduce a delay before executing a function, such as animations or scheduled tasks.</li>
+<li>When you want to control the order of execution of code in relation to other macrotasks in the event loop.</li>
+</ul>
+</li>
+</ol>
+<p>Example of <code>setTimeout</code>:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Start&#39;</span><span class="p">);</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Timeout callback&#39;</span><span class="p">);</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;End&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Start
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>End
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Timeout callback
+</span></code></pre></div>
+<h3 id="setimmediate"><code>setImmediate</code>:<a class="headerlink" href="#setimmediate" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Immediate Execution:</strong> <code>setImmediate</code> is used to schedule a function to run immediately after the current phase of
+   the event loop completes, but before any other I/O events or timers. It provides a way to execute code in a
+   non-blocking manner as soon as possible.</p>
+</li>
+<li>
+<p><strong>Execution Order:</strong> The callback scheduled with <code>setImmediate</code> is placed in the microtask queue, making it execute
+   immediately after the current execution context is finished, even before other macrotasks in the event loop.</p>
+</li>
+<li>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>When you want to ensure that a callback is executed as soon as possible without introducing any artificial delay.</li>
+<li>When you need to prioritize certain tasks over others in the event loop.</li>
+</ul>
+</li>
+</ol>
+<p>Example of <code>setImmediate</code>:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Start&#39;</span><span class="p">);</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">setImmediate</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Immediate callback&#39;</span><span class="p">);</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">});</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;End&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Start
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>End
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Immediate callback
+</span></code></pre></div>
+<ul>
+<li>
+<p>Use <code>setTimeout</code> when you need to introduce a delay before executing a function or when you want to control the order
+  of execution in relation to other macrotasks.</p>
+</li>
+<li>
+<p>Use <code>setImmediate</code> when you want a callback to run immediately after the current execution context without any delay,
+  especially when you need to prioritize certain tasks over others in the event loop.</p>
+</li>
+</ul>
+<p>Both functions have their distinct purposes, and choosing the right one depends on your specific use case and timing
+requirements in your Node.js application.</p>
+<hr />
+<h2 id="processnexttick"><code>process.nextTick()</code><a class="headerlink" href="#processnexttick" title="Permanent link">&para;</a></h2>
+<p>The <code>process.nextTick()</code> function in Node.js is a mechanism that allows you to schedule a callback to be executed
+immediately after the current execution stack is cleared, but before any pending I/O operations or timers. It has a
+unique role in the event loop and is often used for certain tasks. Let's explore its purpose and how it affects the
+event loop:</p>
+<h3 id="purpose-of-processnexttick">Purpose of <code>process.nextTick()</code>:<a class="headerlink" href="#purpose-of-processnexttick" title="Permanent link">&para;</a></h3>
+<p>The primary purpose of <code>process.nextTick()</code> is to defer the execution of a callback function to the next iteration of
+the event loop, ensuring that it runs as soon as possible, before any other I/O operations or timers. This makes it
+suitable for performing tasks that require high priority and need to be executed immediately.</p>
+<h3 id="effect-on-the-event-loop">Effect on the Event Loop:<a class="headerlink" href="#effect-on-the-event-loop" title="Permanent link">&para;</a></h3>
+<p>When you call <code>process.nextTick(callback)</code>, the provided callback function is added to the microtask queue. Unlike
+callbacks scheduled with <code>setTimeout</code> or <code>setImmediate</code>, microtask callbacks are executed before any macrotasks in the
+event loop. Here's how it affects the event loop:</p>
+<ol>
+<li>
+<p><strong>Current Execution Stack</strong>: When a piece of code is executing in the current stack, and you
+   call <code>process.nextTick(callback)</code>, the callback is not executed immediately but is scheduled to run after the current
+   stack is cleared.</p>
+</li>
+<li>
+<p><strong>Clearing the Current Stack</strong>: Once the current execution stack is cleared (all synchronous code has executed),
+   Node.js immediately processes all the callbacks in the microtask queue, including the ones scheduled
+   with <code>process.nextTick()</code>.</p>
+</li>
+<li>
+<p><strong>No Timers or I/O Operations in Between</strong>: Importantly, <code>process.nextTick()</code> callbacks are executed before any
+   pending timers, I/O operations, or other macrotasks, ensuring high-priority tasks are handled without delay.</p>
+</li>
+</ol>
+<h3 id="use-cases-for-processnexttick">Use Cases for <code>process.nextTick()</code>:<a class="headerlink" href="#use-cases-for-processnexttick" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Modifying Global Variables</strong>: You can use <code>process.nextTick()</code> to modify global variables immediately after an
+   asynchronous function has run, ensuring the modified values are available in the next iteration of the event loop.</p>
+</li>
+<li>
+<p><strong>Error Handling</strong>: It's often used in error handling to ensure that error-related tasks, such as logging or cleanup,
+   are executed immediately and don't interfere with the regular flow of code.</p>
+</li>
+<li>
+<p><strong>Event Emitters</strong>: Libraries and modules that emit events often use <code>process.nextTick()</code> to make sure event handlers
+   are registered before any events are emitted.</p>
+</li>
+</ol>
+<p>Example of <code>process.nextTick()</code> for error handling:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nx">someAsyncFunction</span><span class="p">();</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="c1">// Handle the error synchronously</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="c1">// Perform error-related tasks asynchronously</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="p">});</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>
+<p><code>process.nextTick()</code> allows you to schedule a callback to run immediately after the current execution stack, before
+  any pending I/O operations or timers.</p>
+</li>
+<li>
+<p>It is useful for high-priority tasks, error handling, and ensuring that certain code runs immediately after
+  asynchronous operations.</p>
+</li>
+<li>
+<p>Be cautious not to overuse it, as excessive use can lead to callback hell and negatively impact the event loop's
+  performance.</p>
+</li>
+</ul>
+<hr />
+<h3 id="prevent-the-event-loop-from-blocking-the-main-thread">Prevent the event loop from blocking the main thread<a class="headerlink" href="#prevent-the-event-loop-from-blocking-the-main-thread" title="Permanent link">&para;</a></h3>
+<p>Preventing the event loop from blocking the main thread in a Node.js application is crucial to maintain the
+application's responsiveness and scalability, especially in scenarios where you have many concurrent operations or a
+heavy workload. Here are some strategies to achieve non-blocking behavior and ensure the event loop remains responsive:</p>
+<ol>
+<li>
+<p><strong>Use Asynchronous I/O Operations:</strong></p>
+<ul>
+<li>Node.js provides built-in asynchronous I/O operations for file system, network, and other tasks. Always prefer
+  using these asynchronous methods (e.g., <code>fs.promises.readFile</code>, <code>http.get</code>) over their synchronous counterparts.</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilize Promises:</strong></p>
+<ul>
+<li>Promises help organize asynchronous code and handle asynchronous operations more cleanly. Modern APIs and
+  libraries often provide Promise-based interfaces.</li>
+<li>You can also convert callback-based APIs to Promise-based using utilities like <code>util.promisify</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Leverage <code>async/await</code>:</strong></p>
+<ul>
+<li>The <code>async/await</code> syntax simplifies working with Promises and makes asynchronous code more readable and
+  maintainable.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimize CPU-Intensive Operations:</strong></p>
+<ul>
+<li>For CPU-intensive tasks, consider offloading the work to worker threads or child processes using
+  the <code>worker_threads</code> module or <code>child_process</code> module to avoid blocking the main thread.</li>
+</ul>
+</li>
+<li>
+<p><strong>Use Event Emitters and Callbacks:</strong></p>
+<ul>
+<li>Instead of synchronous loops or polling, use event emitters and callbacks to handle events and asynchronous
+  results. This allows your code to continue running without waiting for events.</li>
+</ul>
+</li>
+<li>
+<p><strong>Set Proper Timeouts:</strong></p>
+<ul>
+<li>When using timers with <code>setTimeout</code> or <code>setImmediate</code>, ensure that the timeouts are reasonable. Excessively short
+  timeouts may lead to inefficient event loop processing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Implement Rate Limiting and Throttling:</strong></p>
+<ul>
+<li>When dealing with external services or APIs, implement rate limiting and throttling to avoid overloading your
+  Node.js application with too many requests.</li>
+</ul>
+</li>
+<li>
+<p><strong>Avoid Blocking Code in Event Loop Callbacks:</strong></p>
+<ul>
+<li>Be cautious about writing blocking code within callbacks. For example, avoid performing synchronous I/O operations
+  or heavy computations within event loop callbacks.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimize Database Queries:</strong></p>
+<ul>
+<li>Use database connection pools, indexes, and efficient queries to minimize the time spent waiting for database
+  operations to complete.</li>
+</ul>
+</li>
+<li>
+<p><strong>Use Load Balancing and Scaling:</strong></p>
+<ul>
+<li>Distribute the load across multiple instances of your Node.js application by using load balancing solutions like
+  Nginx or deploying your application in a cluster to take advantage of multi-core processors.</li>
+</ul>
+</li>
+<li>
+<p><strong>Profile and Monitor Performance:</strong></p>
+<ul>
+<li>Regularly profile your application to identify performance bottlenecks and areas where the event loop might get
+  blocked. Tools like Node.js's built-in <code>performance</code> and third-party profiling tools can help.</li>
+</ul>
+</li>
+<li>
+<p><strong>Implement Caching:</strong></p>
+<ul>
+<li>Utilize caching mechanisms, such as in-memory caching or caching proxies like Redis, to reduce the need for
+  repetitive and expensive calculations or data fetching.</li>
+</ul>
+</li>
+<li>
+<p><strong>Consider Queues:</strong></p>
+<ul>
+<li>Implement task queues (e.g., using libraries like RabbitMQ or Redis) to handle background processing of tasks,
+  freeing the main thread from long-running tasks.</li>
+</ul>
+</li>
+</ol>
+<p>By following these best practices and using asynchronous patterns, you can effectively prevent the event loop from
+blocking the main thread in your Node.js application, ensuring it remains responsive and scalable, even under heavy
+workloads.</p>
+<hr />
+<h2 id="worker-threads-and-child-processes">Worker Threads and Child Processes<a class="headerlink" href="#worker-threads-and-child-processes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Worker Threads</th>
+<th>Child Processes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Concurrency Type</td>
+<td>Designed for CPU-bound tasks</td>
+<td>Typically used for I/O-bound tasks or running external processes</td>
+</tr>
+<tr>
+<td>Isolation Level</td>
+<td>Higher level of isolation, shares memory within Node.js runtime</td>
+<td>Separate Node.js instances with their own memory and event loop</td>
+</tr>
+<tr>
+<td>Communication Mechanism</td>
+<td>Efficient data sharing through direct memory access</td>
+<td>Supports Interprocess Communication (IPC) for data exchange</td>
+</tr>
+<tr>
+<td>Use Case</td>
+<td>Suitable for parallel execution of JavaScript code within Node.js runtime</td>
+<td>Used for running external programs, handling I/O-bound tasks, or executing JavaScript files in separate Node.js processes</td>
+</tr>
+<tr>
+<td>Resource Sharing</td>
+<td>Efficient sharing of data and state within the same runtime</td>
+<td>Limited data sharing; requires serialization and IPC for communication</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Efficient for CPU-bound tasks</td>
+<td>Suitable for I/O-bound tasks, less efficient for CPU-bound tasks</td>
+</tr>
+<tr>
+<td>Overhead</td>
+<td>Lower overhead due to shared memory</td>
+<td>Higher overhead due to separate Node.js instances</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>Can be more complex to manage shared state</td>
+<td>Simpler for independent processes</td>
+</tr>
+<tr>
+<td>Use Cases</td>
+<td>Data processing, parallel computation, multithreaded algorithms</td>
+<td>Running external scripts, handling multiple I/O operations</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="event-driven-architecture">Event-Driven Architecture<a class="headerlink" href="#event-driven-architecture" title="Permanent link">&para;</a></h2>
+<p>Node.js is built on an event-driven architecture, which is a key aspect of its design. This architecture revolves around
+the concept of events, event listeners, and callbacks. Here's an explanation of how event-driven architecture works in
+Node.js and its advantages:</p>
+<h3 id="key-concepts_1">Key Concepts:<a class="headerlink" href="#key-concepts_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Events</strong>: Events are occurrences or incidents that happen within a Node.js application. These events can be
+   triggered by various actions, such as user interactions, incoming requests, or data arriving from external sources (
+   e.g., a database query response or a network request completion).</p>
+</li>
+<li>
+<p><strong>Event Emitters</strong>: In Node.js, many objects (e.g., <code>EventEmitter</code>) can emit events. These objects are capable of
+   signaling when a specific event occurs. For example, a server object can emit an event when it receives an HTTP
+   request.</p>
+</li>
+<li>
+<p><strong>Event Listeners</strong>: Event listeners are functions that are registered to listen for specific events. When an event
+   is emitted, all registered event listeners for that event are executed.</p>
+</li>
+<li>
+<p><strong>Callbacks</strong>: Callback functions are functions that are passed as arguments to event listeners. They get executed
+   when a specific event occurs. Callbacks are a fundamental part of asynchronous programming in Node.js.</p>
+</li>
+</ol>
+<h3 id="how-event-driven-architecture-works">How Event-Driven Architecture Works:<a class="headerlink" href="#how-event-driven-architecture-works" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Event Emission</strong>: Objects in a Node.js application emit events when certain actions or conditions are met. For
+   example, an HTTP server might emit an "incoming request" event when a client makes an HTTP request.</p>
+</li>
+<li>
+<p><strong>Event Registration</strong>: Event listeners are registered to specific events using <code>.on()</code> or <code>.addListener()</code> methods.
+   These listeners specify what should happen when the associated event occurs.</p>
+</li>
+<li>
+<p><strong>Event Handling</strong>: When an event is emitted, all registered event listeners for that event are called. They execute
+   their associated callback functions in the order they were registered.</p>
+</li>
+<li>
+<p><strong>Non-Blocking</strong>: Event-driven architecture allows Node.js to handle multiple events simultaneously without blocking
+   the main thread. This non-blocking nature makes Node.js highly efficient and suitable for handling a large number of
+   concurrent connections.</p>
+</li>
+</ol>
+<h3 id="advantages-of-event-driven-architecture-in-nodejs">Advantages of Event-Driven Architecture in Node.js:<a class="headerlink" href="#advantages-of-event-driven-architecture-in-nodejs" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>High Scalability</strong>: Node.js can efficiently handle a large number of concurrent connections because it doesn't
+   block the main thread. This scalability is particularly useful for building real-time applications like chat
+   applications or online gaming platforms.</p>
+</li>
+<li>
+<p><strong>Non-Blocking I/O</strong>: Node.js leverages non-blocking I/O operations, allowing it to efficiently manage I/O-bound
+   tasks without causing delays or bottlenecks. This is crucial for handling file I/O, network requests, and database
+   operations.</p>
+</li>
+<li>
+<p><strong>Responsive and Real-Time Applications</strong>: The event-driven model enables the creation of responsive and real-time
+   applications. It's well-suited for applications that require instant responses, such as chat applications, live
+   dashboards, or streaming services.</p>
+</li>
+<li>
+<p><strong>Modular and Maintainable Code</strong>: Event-driven programming encourages modular code design. You can easily organize
+   your code into reusable modules that respond to specific events, making the codebase more maintainable and
+   extensible.</p>
+</li>
+<li>
+<p><strong>Scalable Microservices</strong>: Node.js's event-driven architecture is suitable for building microservices architectures.
+   Each microservice can handle its events, making it easier to develop, test, and scale individual services.</p>
+</li>
+<li>
+<p><strong>Developer Productivity</strong>: Node.js simplifies asynchronous programming through its event-driven model. This can lead
+   to improved developer productivity, as it reduces the complexity of handling asynchronous tasks.</p>
+</li>
+</ol>
+<p>In summary, Node.js's event-driven architecture is a core feature that makes it well-suited for building
+high-performance, real-time, and scalable applications. It enables efficient handling of events and I/O operations while
+maintaining non-blocking behavior, resulting in responsive and resource-efficient applications.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.highlight", "search.suggest", "navigation.path", "navigation.top", "content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", {"palette": [{"media": "(prefers-color-scheme)", "toggle": {"icon": "material/link", "name": "Switch to light mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: light)", "primary": "indigo", "scheme": "default", "toggle": {"icon": "material/toggle-switch", "name": "Switch to dark mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: dark)", "primary": "black", "scheme": "slate", "toggle": {"icon": "material/toggle-switch-off", "name": "Switch to system preference"}}]}], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

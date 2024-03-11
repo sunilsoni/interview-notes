@@ -1,0 +1,5039 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://interview-notes.com/microservices/">
+      
+      
+        <link rel="prev" href="../spring/webFlux/">
+      
+      
+        <link rel="next" href="solid/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Microservices - Interview Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#microservices" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Interview Notes" class="md-header__button md-logo" aria-label="Interview Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Interview Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Microservices
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../java/" class="md-tabs__link">
+          
+  
+    
+  
+  Languages
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../spring/" class="md-tabs__link">
+          
+  
+    
+  
+  Web Development
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../mq/kafka/" class="md-tabs__link">
+          
+  
+    
+  
+  MQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../devops/" class="md-tabs__link">
+          
+  
+    
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../db/" class="md-tabs__link">
+          
+  
+    
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+    
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../design-pattern/" class="md-tabs__link">
+          
+  
+    
+  
+  Design Pattern
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ds-algo/" class="md-tabs__link">
+          
+  
+    
+  
+  Algorithms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../qa/" class="md-tabs__link">
+          
+  
+    
+  
+  QA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../misc/agile/" class="md-tabs__link">
+          
+  
+    
+  
+  Misc
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../tags/" class="md-tabs__link">
+        
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Interview Notes" class="md-nav__button md-logo" aria-label="Interview Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Interview Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Languages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Languages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../java/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/java8/java8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 8
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/java8/FunctionalInterface/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Functional Interface
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/java17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../nodejs/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Node.js
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Node.js
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodejs/module/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodejs/eventloop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event Loop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodejs/express/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Express.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../python/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../golang/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Golang
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Golang
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Web Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Web Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../spring/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/security/security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/security/annotations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Annotations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/security/filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security Filters 
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/springboot/spring-boot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/springboot/springboot-actuator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Boot Actuator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/spring-mvc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring MVC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/transaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Transaction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/webFlux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring WebFlux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  <span class="md-ellipsis">
+    Microservices
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Microservices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="solid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SOLID
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../angular/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Angular
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Angular
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../javascript/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Javascript
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Javascript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../typescript/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    TypeScript
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            TypeScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../react/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            React
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lifecycle Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/react-component/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Component
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/enzyme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enzyme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/eslint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESLint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/react-router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React Router
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/redux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/redux-thunk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redux Thunk
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/rest-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/nextjs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../html/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    HTML
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            HTML
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../css/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CSS
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            CSS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/kafka/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache Kafka
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/rebbitmq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/activemq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache ActiveMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/sqs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Amazon SQS (Simple Queue Service)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/servicebus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microsoft Azure sqs.md
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/pubsub/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Cloud Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis Pub/Sub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../devops/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            DevOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/aws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/azure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/gcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cloud/openshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenShift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/vcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VCS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/cicd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization and Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/iac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure as Code (IaC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Monitoring and Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Container Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/scanning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scanning and Compliance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/artifact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifact Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/gitops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../db/" class="md-nav__link ">
+              
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17m0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81M12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2Z"/></svg>
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/cassandra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cassandra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/couchbase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Couchbase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/dynamoDB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DynamoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/mongodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MongoDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/oracle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Oracle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/postgreSql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PostgreSql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../design-pattern/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Design Pattern
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Design Pattern
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/behavioral-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Behavioral Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/creational-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creational Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/structural-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structural Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/other-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../ds-algo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ds-algo/algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../qa/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    QA
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            QA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/cucumber/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/selenium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selenium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/protractor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protractor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/cypress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cypress
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/website/webdriverIO/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebdriverIO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apigee
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/apigee/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cucumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/jest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/mocha-chai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mocha/Chai
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/karate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    karate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/postman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    postman
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/rest-assured/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest Assured
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/microservices/testng/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestNG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/mobile/appium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/mobile/robot-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Robot Framework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qa/jmeter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JMeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../misc/agile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agile methodology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../misc/security-scan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Scan Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../misc/production-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Production Support Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tags
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#microservices_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microservices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microservices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#characteristics-of-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Characteristics of Microservices:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monolithic-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monolithic Architectures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monolithic Architectures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#characteristics-of-monolithic-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Characteristics of Monolithic Architectures:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-between-microservices-and-monolithic-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing Between Microservices and Monolithic Architectures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Microservices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monolithic-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monolithic Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microservices-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microservices Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-benefits-of-using-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Benefits of Using Microservices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Benefits of Using Microservices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-scalability" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Scalability:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-faster-development-cycles" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Faster Development Cycles:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-enhanced-flexibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Enhanced Flexibility:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-technology-diversity" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Technology Diversity:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Resilience:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-easier-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Easier Maintenance:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-scalable-teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Scalable Teams:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-improved-fault-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Improved Fault Isolation:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-elasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Elasticity:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-devops-enablement" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. DevOps Enablement:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-agility" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Agility:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-cost-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Cost Efficiency:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-competitive-advantage" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Competitive Advantage:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-polyglot-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Polyglot Persistence:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-micro-frontends-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      15. Micro Frontends Integration:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges-and-drawbacks-of-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges and Drawbacks of Microservices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Challenges and Drawbacks of Microservices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-increased-complexity-in-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Increased Complexity in Communication:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Data Consistency:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-operational-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Operational Challenges:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-service-discovery-and-load-balancing" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Service Discovery and Load Balancing:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-testing-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Testing Complexity:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-security-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Security Concerns:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-monitoring-and-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Monitoring and Debugging:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-resource-overhead" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Resource Overhead:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-development-and-deployment-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Development and Deployment Complexity:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-team-coordination" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Team Coordination:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-migration-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Migration Challenges:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-costs-and-licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Costs and Licensing:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-cultural-shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Cultural Shift:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-documentation-and-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Documentation and Communication:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microservices-communication-synchronous-vs-asynchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microservices Communication: Synchronous vs. Asynchronous
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microservices Communication: Synchronous vs. Asynchronous">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchronous-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronous Communication:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asynchronous-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asynchronous Communication:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-right-communication-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing the Right Communication Method:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microservices-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microservices Design Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microservices Design Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-service-registry-and-discovery-eureka" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Service Registry and Discovery (Eureka)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-api-gateway-spring-cloud-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. API Gateway (Spring Cloud Gateway)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-circuit-breaker-hystrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Circuit Breaker (Hystrix)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-saga-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Saga Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-event-sourcing-and-cqrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Event Sourcing and CQRS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-bulkhead-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Bulkhead Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-database-per-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Database per Service
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-aggregator-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Aggregator Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-saga-orchestrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Saga Orchestrator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-retry-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Retry Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-back-pressure-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Back Pressure Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-synchronous-communication-via-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Synchronous Communication via API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-polyglot-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Polyglot Microservices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-externalized-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. Externalized Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-log-aggregation-and-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      15. Log Aggregation and Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-shared-database-with-schema-per-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      16. Shared Database with Schema per Service
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-service-mesh-istio" class="md-nav__link">
+    <span class="md-ellipsis">
+      17. Service Mesh (Istio)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-event-driven-microservices-with-kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      18. Event-Driven Microservices with Kafka
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-distributed-tracing-with-zipkin" class="md-nav__link">
+    <span class="md-ellipsis">
+      19. Distributed Tracing with Zipkin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20-api-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      20. API Versioning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Gateway
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="microservices">Microservices<a class="headerlink" href="#microservices" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="microservices_1">Microservices<a class="headerlink" href="#microservices_1" title="Permanent link">&para;</a></h2>
+<p>Microservices are a software architectural style where an application is divided into small, independent services that can be developed, deployed, and scaled individually. In contrast, monolithic architectures consist of a single, tightly-coupled codebase where all functionality is part of a single application.</p>
+<p>Microservices is an architectural approach where a complex application is broken down into a set of smaller, independent services. Each service is responsible for a specific piece of functionality and operates as a standalone unit.</p>
+<h4 id="characteristics-of-microservices">Characteristics of Microservices:<a class="headerlink" href="#characteristics-of-microservices" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Modularity</strong>: Services are divided based on specific business capabilities or functions, making them highly modular and focused.</p>
+</li>
+<li>
+<p><strong>Independence</strong>: Each service can be developed, deployed, and maintained independently, allowing for faster development cycles.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: Services can be scaled individually to handle varying levels of load, improving resource utilization.</p>
+</li>
+<li>
+<p><strong>Technology Diversity</strong>: Different services can use different technologies and databases, allowing teams to choose the best tools for their tasks.</p>
+</li>
+<li>
+<p><strong>Resilience</strong>: Failures in one service do not necessarily impact the entire system, as other services can continue to function.</p>
+</li>
+<li>
+<p><strong>Flexibility</strong>: Easier to adopt DevOps practices, continuous deployment, and automated testing.</p>
+</li>
+</ul>
+<h3 id="monolithic-architectures">Monolithic Architectures<a class="headerlink" href="#monolithic-architectures" title="Permanent link">&para;</a></h3>
+<p>In a monolithic architecture, the entire application is a single, tightly-coupled codebase. All components and functionalities are part of the same application, making it challenging to scale and maintain as it grows.</p>
+<h4 id="characteristics-of-monolithic-architectures">Characteristics of Monolithic Architectures:<a class="headerlink" href="#characteristics-of-monolithic-architectures" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Single Codebase</strong>: The entire application is developed within a single codebase, leading to increased complexity as the application grows.</p>
+</li>
+<li>
+<p><strong>Tight Coupling</strong>: Components are tightly integrated, making it challenging to modify or update one part without affecting others.</p>
+</li>
+<li>
+<p><strong>Limited Scalability</strong>: Scaling often involves replicating the entire application, even if only a specific component requires more resources.</p>
+</li>
+<li>
+<p><strong>Homogeneous Technology</strong>: Typically uses a single technology stack and database system for the entire application.</p>
+</li>
+<li>
+<p><strong>Development Bottlenecks</strong>: Slower development cycles, as changes to one part of the application can impact the entire codebase.</p>
+</li>
+<li>
+<p><strong>Less Resilience</strong>: A failure in one part of the application can potentially bring down the entire system.</p>
+</li>
+</ul>
+<h2 id="choosing-between-microservices-and-monolithic-architectures">Choosing Between Microservices and Monolithic Architectures<a class="headerlink" href="#choosing-between-microservices-and-monolithic-architectures" title="Permanent link">&para;</a></h2>
+<p>The choice between Microservices and monolithic architectures depends on various factors, including the complexity of the application, the team's expertise, scalability requirements, and development speed. Microservices offer flexibility, scalability, and modularity but come with additional complexity in terms of orchestration and communication between services. Monolithic architectures may be simpler for smaller projects but can become unwieldy as applications grow in size and complexity. The decision should be based on the specific needs and goals of the project.</p>
+<h2 id="introduction-to-microservices">Introduction to Microservices<a class="headerlink" href="#introduction-to-microservices" title="Permanent link">&para;</a></h2>
+<p>Microservices and monolithic architectures are two different approaches to software development. A monolithic architecture is a traditional model of a software program, which is built as a unified unit that is self-contained and independent from other applications. In contrast, a microservices architecture is a collection of smaller, independently deployable services.</p>
+<h2 id="monolithic-architecture">Monolithic Architecture<a class="headerlink" href="#monolithic-architecture" title="Permanent link">&para;</a></h2>
+<p>In a monolithic architecture, the entire application is built as a single, self-contained unit. All the components of the application are tightly coupled and share the same codebase. This makes it difficult to scale individual components of the application independently. Monolithic architectures are typically easier to develop and deploy, but they can become difficult to maintain and scale as the application grows.</p>
+<h2 id="microservices-architecture">Microservices Architecture<a class="headerlink" href="#microservices-architecture" title="Permanent link">&para;</a></h2>
+<p>In a microservices architecture, the application is broken down into smaller, independent services. Each service is responsible for a specific task or set of tasks. These services communicate with each other through APIs. This makes it easier to scale individual components of the application independently. Microservices architectures are typically more complex to develop and deploy, but they are more flexible and scalable than monolithic architectures.</p>
+<p>Here are some of the key differences between microservices and monolithic architectures:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Monolithic Architecture</strong></th>
+<th><strong>Microservices Architecture</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Built as a single, self-contained unit</td>
+<td>Built as a collection of smaller, independent services</td>
+</tr>
+<tr>
+<td>All components are tightly coupled and share the same codebase</td>
+<td>Components are loosely coupled and communicate through APIs</td>
+</tr>
+<tr>
+<td>Difficult to scale individual components independently</td>
+<td>Easy to scale individual components independently</td>
+</tr>
+<tr>
+<td>Easier to develop and deploy</td>
+<td>More complex to develop and deploy</td>
+</tr>
+<tr>
+<td>Can become difficult to maintain and scale as the application grows</td>
+<td>More flexible and scalable than monolithic architectures</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-benefits-of-using-microservices">Key Benefits of Using Microservices<a class="headerlink" href="#key-benefits-of-using-microservices" title="Permanent link">&para;</a></h2>
+<p>Microservices offer several key benefits for software development, including improved scalability, faster development cycles, enhanced flexibility, technology diversity, resilience, and easier maintenance. These advantages make Microservices a popular architectural choice for modern applications.</p>
+<p>Microservices architecture offers numerous advantages for software development and deployment, making it a preferred choice for building modern, scalable applications. Here are the key benefits of using Microservices:</p>
+<h3 id="1-scalability">1. Scalability:<a class="headerlink" href="#1-scalability" title="Permanent link">&para;</a></h3>
+<p>Microservices allow for individual components or services to be scaled independently. This flexibility ensures that resources can be allocated precisely where needed, optimizing performance and cost efficiency.</p>
+<h3 id="2-faster-development-cycles">2. Faster Development Cycles:<a class="headerlink" href="#2-faster-development-cycles" title="Permanent link">&para;</a></h3>
+<p>Smaller, focused teams can develop and deploy Microservices independently. This parallelization of work accelerates development cycles, enabling quicker releases and updates.</p>
+<h3 id="3-enhanced-flexibility">3. Enhanced Flexibility:<a class="headerlink" href="#3-enhanced-flexibility" title="Permanent link">&para;</a></h3>
+<p>Microservices are highly modular, allowing developers to choose the best technology stack and database for each service. This flexibility enables the use of different programming languages, frameworks, and tools within the same application.</p>
+<h3 id="4-technology-diversity">4. Technology Diversity:<a class="headerlink" href="#4-technology-diversity" title="Permanent link">&para;</a></h3>
+<p>Teams can select the most suitable technologies for specific Microservices, promoting innovation and adapting to evolving industry standards.</p>
+<h3 id="5-resilience">5. Resilience:<a class="headerlink" href="#5-resilience" title="Permanent link">&para;</a></h3>
+<p>Failures in one Microservice do not necessarily disrupt the entire application. Isolation of services ensures that the overall system remains operational even when some services experience issues.</p>
+<h3 id="6-easier-maintenance">6. Easier Maintenance:<a class="headerlink" href="#6-easier-maintenance" title="Permanent link">&para;</a></h3>
+<p>Smaller, self-contained Microservices are easier to maintain and update. Changes in one service have minimal impact on others, reducing the risk of unintended consequences.</p>
+<h3 id="7-scalable-teams">7. Scalable Teams:<a class="headerlink" href="#7-scalable-teams" title="Permanent link">&para;</a></h3>
+<p>Microservices facilitate the division of larger development teams into smaller, autonomous groups. Each team can own and maintain a specific Microservice, leading to improved accountability and efficiency.</p>
+<h3 id="8-improved-fault-isolation">8. Improved Fault Isolation:<a class="headerlink" href="#8-improved-fault-isolation" title="Permanent link">&para;</a></h3>
+<p>Problems in one Microservice can be isolated and addressed without affecting the entire application, resulting in faster problem resolution.</p>
+<h3 id="9-elasticity">9. Elasticity:<a class="headerlink" href="#9-elasticity" title="Permanent link">&para;</a></h3>
+<p>Microservices architecture aligns well with cloud-based deployment, allowing applications to take advantage of cloud resources and autoscaling capabilities.</p>
+<h3 id="10-devops-enablement">10. DevOps Enablement:<a class="headerlink" href="#10-devops-enablement" title="Permanent link">&para;</a></h3>
+<p>Microservices encourage the adoption of DevOps practices, such as continuous integration, continuous deployment, and automated testing, enhancing collaboration between development and operations teams.</p>
+<h3 id="11-agility">11. Agility:<a class="headerlink" href="#11-agility" title="Permanent link">&para;</a></h3>
+<p>Microservices enable organizations to respond quickly to changing market demands and customer requirements. New features can be developed, tested, and deployed independently.</p>
+<h3 id="12-cost-efficiency">12. Cost Efficiency:<a class="headerlink" href="#12-cost-efficiency" title="Permanent link">&para;</a></h3>
+<p>By optimizing resource usage through independent scaling, Microservices can lead to cost savings, particularly in cloud-based environments.</p>
+<h3 id="13-competitive-advantage">13. Competitive Advantage:<a class="headerlink" href="#13-competitive-advantage" title="Permanent link">&para;</a></h3>
+<p>Organizations that embrace Microservices can deliver innovative and responsive applications, gaining a competitive edge in the market.</p>
+<h3 id="14-polyglot-persistence">14. Polyglot Persistence:<a class="headerlink" href="#14-polyglot-persistence" title="Permanent link">&para;</a></h3>
+<p>Microservices allow for the use of different databases, including NoSQL and relational databases, based on the specific requirements of each service.</p>
+<h3 id="15-micro-frontends-integration">15. Micro Frontends Integration:<a class="headerlink" href="#15-micro-frontends-integration" title="Permanent link">&para;</a></h3>
+<p>Micro Frontends, a complement to Microservices, enable the development of modular and independently deployable user interfaces, further enhancing application flexibility and maintainability.</p>
+<p>In summary, Microservices architecture offers a range of benefits that align with the demands of modern software development. These advantages include improved scalability, faster development cycles, enhanced flexibility, technology diversity, resilience, easier maintenance, and many others, making it a compelling choice for building scalable and agile applications.</p>
+<hr />
+<h2 id="challenges-and-drawbacks-of-microservices">Challenges and Drawbacks of Microservices<a class="headerlink" href="#challenges-and-drawbacks-of-microservices" title="Permanent link">&para;</a></h2>
+<p>While Microservices offer many advantages, they also come with challenges and drawbacks. Common issues include increased complexity in communication, potential data consistency problems, operational challenges, and the need for robust monitoring and testing strategies. It's essential to carefully consider these challenges when adopting Microservices.</p>
+<p>Microservices architecture offers numerous benefits, but it also presents several challenges and drawbacks that organizations must address:</p>
+<h3 id="1-increased-complexity-in-communication">1. <strong>Increased Complexity in Communication:</strong><a class="headerlink" href="#1-increased-complexity-in-communication" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Microservices rely on network communication for inter-service interactions, which can introduce latency and complexity. Developers must implement effective communication patterns, such as REST, gRPC, or message queues, and handle potential issues like network failures and service discovery.</li>
+</ul>
+<h3 id="2-data-consistency">2. <strong>Data Consistency:</strong><a class="headerlink" href="#2-data-consistency" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Maintaining data consistency across multiple Microservices can be challenging. Distributed transactions are complex to implement, and eventual consistency models may lead to data synchronization issues. Organizations must carefully design data management strategies.</li>
+</ul>
+<h3 id="3-operational-challenges">3. <strong>Operational Challenges:</strong><a class="headerlink" href="#3-operational-challenges" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Microservices require robust operational practices. Organizations need to manage a larger number of services, potentially leading to increased operational overhead. Challenges include deployment automation, monitoring, and handling service failures.</li>
+</ul>
+<h3 id="4-service-discovery-and-load-balancing">4. <strong>Service Discovery and Load Balancing:</strong><a class="headerlink" href="#4-service-discovery-and-load-balancing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Service discovery mechanisms are essential for locating and connecting to Microservices. Load balancing and routing traffic to healthy services can become complex, requiring the use of tools like service registries and API gateways.</li>
+</ul>
+<h3 id="5-testing-complexity">5. <strong>Testing Complexity:</strong><a class="headerlink" href="#5-testing-complexity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Testing Microservices poses challenges, as each service may have its own dependencies and dependencies on other services. Testing in isolation and ensuring end-to-end testing across services is critical for maintaining application reliability.</li>
+</ul>
+<h3 id="6-security-concerns">6. <strong>Security Concerns:</strong><a class="headerlink" href="#6-security-concerns" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Microservices introduce new security challenges, such as managing access control, authentication, and authorization across distributed services. Securing communication between services and protecting sensitive data are crucial considerations.</li>
+</ul>
+<h3 id="7-monitoring-and-debugging">7. <strong>Monitoring and Debugging:</strong><a class="headerlink" href="#7-monitoring-and-debugging" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Microservices require robust monitoring and logging strategies. Debugging distributed systems can be challenging, as issues may span multiple services. Organizations must invest in tools and practices for effective monitoring and debugging.</li>
+</ul>
+<h3 id="8-resource-overhead">8. <strong>Resource Overhead:</strong><a class="headerlink" href="#8-resource-overhead" title="Permanent link">&para;</a></h3>
+<ul>
+<li>While Microservices offer resource scalability, they can also introduce overhead in terms of increased memory and CPU usage. Proper resource allocation and management are essential to optimize costs.</li>
+</ul>
+<h3 id="9-development-and-deployment-complexity">9. <strong>Development and Deployment Complexity:</strong><a class="headerlink" href="#9-development-and-deployment-complexity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Coordinating the development, testing, and deployment of numerous Microservices can be complex. Continuous integration and continuous deployment (CI/CD) pipelines must be well-orchestrated.</li>
+</ul>
+<h3 id="10-team-coordination">10. <strong>Team Coordination:</strong><a class="headerlink" href="#10-team-coordination" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Microservices often lead to smaller, cross-functional teams owning individual services. Ensuring effective communication and coordination among these teams is essential to avoid service silos and maintain a cohesive architecture.</li>
+</ul>
+<h3 id="11-migration-challenges">11. <strong>Migration Challenges:</strong><a class="headerlink" href="#11-migration-challenges" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Migrating from a monolithic architecture to Microservices can be a significant undertaking, involving code refactoring, data migration, and adapting existing processes. Organizations must plan migration strategies carefully.</li>
+</ul>
+<h3 id="12-costs-and-licensing">12. <strong>Costs and Licensing:</strong><a class="headerlink" href="#12-costs-and-licensing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Managing a larger number of services can incur additional costs for hosting, infrastructure, and licensing. Organizations should evaluate the financial implications of Microservices.</li>
+</ul>
+<h3 id="13-cultural-shift">13. <strong>Cultural Shift:</strong><a class="headerlink" href="#13-cultural-shift" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Embracing Microservices often requires a cultural shift within an organization. Teams need to adopt new practices, including DevOps and agile methodologies, to fully realize the benefits of Microservices.</li>
+</ul>
+<h3 id="14-documentation-and-communication">14. <strong>Documentation and Communication:</strong><a class="headerlink" href="#14-documentation-and-communication" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Maintaining up-to-date documentation for each Microservice and ensuring clear communication about service interfaces and contracts are critical to avoid misunderstandings and integration issues.</li>
+</ul>
+<p>In conclusion, while Microservices offer numerous advantages, they are not without challenges and drawbacks. Organizations must carefully plan and address these challenges to successfully adopt Microservices architecture and realize its benefits. Proper design, testing, monitoring, and a robust DevOps culture are key to mitigating these challenges.</p>
+<hr />
+<h2 id="microservices-communication-synchronous-vs-asynchronous">Microservices Communication: Synchronous vs. Asynchronous<a class="headerlink" href="#microservices-communication-synchronous-vs-asynchronous" title="Permanent link">&para;</a></h2>
+<p>Microservices communicate with each other through various mechanisms, primarily synchronous and asynchronous communication. Synchronous communication involves direct, immediate requests and responses, while asynchronous communication relies on message-based systems, enabling decoupled interactions. The choice between these methods depends on factors like latency tolerance, scalability, and system complexity.</p>
+<p>Microservices architecture relies on effective communication between individual services to achieve complex functionality. Two primary communication paradigms are synchronous and asynchronous.</p>
+<h3 id="synchronous-communication">Synchronous Communication:<a class="headerlink" href="#synchronous-communication" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Definition:</strong> In synchronous communication, one Microservice makes a direct request to another Microservice and waits for an immediate response. This is often done via HTTP/HTTPS requests using RESTful APIs or gRPC.</p>
+</li>
+<li>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Simplicity: Synchronous communication is straightforward to implement and understand.</li>
+<li>Real-time: Well-suited for scenarios requiring real-time responses.</li>
+<li>Debugging: Easier to trace and debug as the request and response are correlated.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>Latency: The caller service must wait for the response, which can introduce latency, especially if the called service is slow.</li>
+<li>Tight Coupling: Synchronous calls can lead to tight coupling between services, making it harder to evolve and scale them independently.</li>
+<li>Blocking: Synchronous calls block the caller until the response is received, potentially impacting overall system responsiveness.</li>
+</ul>
+</li>
+<li>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Synchronous communication is suitable for simple, immediate interactions where low latency is acceptable. Examples include fetching reference data or simple data queries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="asynchronous-communication">Asynchronous Communication:<a class="headerlink" href="#asynchronous-communication" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Definition:</strong> In asynchronous communication, Microservices communicate via messages. One service sends a message to a message broker, and other services consume and act upon these messages at their own pace. Popular message brokers include Apache Kafka, RabbitMQ, and Amazon SQS.</p>
+</li>
+<li>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Decoupling: Asynchronous communication decouples services, allowing them to operate independently. Services do not need to know about each other.</li>
+<li>Scalability: Easier to scale services as they are not directly dependent on each other.</li>
+<li>Fault Tolerance: Messages can be retried or persisted, ensuring reliable communication even if a service is temporarily unavailable.</li>
+<li>Load Leveling: Helps distribute the load by allowing services to process messages at their own rate.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>Complexity: Implementing asynchronous communication can be more complex due to the need for message brokers and handling message processing errors.</li>
+<li>Eventual Consistency: Asynchronous systems may introduce eventual consistency, where data may not be immediately up-to-date across all services.</li>
+<li>Debugging: Debugging asynchronous systems can be challenging, as tracing the flow of messages may require additional tooling.</li>
+</ul>
+</li>
+<li>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Asynchronous communication is suitable for scenarios where low latency is not critical, and services can process messages at their own pace. Examples include event-driven architectures, distributed processing, and long-running tasks.</li>
+</ul>
+</li>
+</ul>
+<h3 id="choosing-the-right-communication-method">Choosing the Right Communication Method:<a class="headerlink" href="#choosing-the-right-communication-method" title="Permanent link">&para;</a></h3>
+<p>The choice between synchronous and asynchronous communication depends on factors such as latency tolerance, system complexity, scalability requirements, and use case-specific needs. Many Microservices architectures combine both communication paradigms, leveraging the strengths of each to build flexible and responsive systems.</p>
+<hr />
+<h2 id="microservices-design-patterns">Microservices Design Patterns<a class="headerlink" href="#microservices-design-patterns" title="Permanent link">&para;</a></h2>
+<p>Microservices design patterns are architectural blueprints that provide solutions to common challenges faced when developing Microservices-based applications. These patterns help in achieving scalability, resilience, and maintainability. Here, we'll explore some essential Microservices design patterns with examples in Java.</p>
+<p>Microservices architecture introduces various challenges, such as service communication, data management, and fault tolerance. To address these challenges, developers can use Microservices design patterns. Let's explore some essential patterns with Java examples:</p>
+<h3 id="1-service-registry-and-discovery-eureka">1. <strong>Service Registry and Discovery (Eureka)</strong><a class="headerlink" href="#1-service-registry-and-discovery-eureka" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> Microservices often need to locate and communicate with other services. The Service Registry and Discovery pattern, implemented using tools like Netflix Eureka, allows services to register themselves and discover others dynamically.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Spring Cloud Netflix Eureka for service registration and discovery:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Service registration in application.properties</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">spring</span><span class="p">.</span><span class="na">application</span><span class="p">.</span><span class="na">name</span><span class="o">=</span><span class="n">my</span><span class="o">-</span><span class="n">service</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">eureka</span><span class="p">.</span><span class="na">client</span><span class="p">.</span><span class="na">serviceUrl</span><span class="p">.</span><span class="na">defaultZone</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="c1">//eureka-server:8761/eureka/</span>
+</span></code></pre></div>
+<h3 id="2-api-gateway-spring-cloud-gateway">2. <strong>API Gateway (Spring Cloud Gateway)</strong><a class="headerlink" href="#2-api-gateway-spring-cloud-gateway" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> An API Gateway acts as an entry point for clients and manages requests by routing them to the appropriate Microservices. It can handle authentication, load balancing, and caching.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Spring Cloud Gateway to create an API Gateway:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Bean</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">RouteLocator</span><span class="w"> </span><span class="nf">customRouteLocator</span><span class="p">(</span><span class="n">RouteLocatorBuilder</span><span class="w"> </span><span class="n">builder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">routes</span><span class="p">()</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="p">.</span><span class="na">route</span><span class="p">(</span><span class="s">&quot;service-route&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="s">&quot;/service/**&quot;</span><span class="p">)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">            </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;lb://service-instance&quot;</span><span class="p">))</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="3-circuit-breaker-hystrix">3. <strong>Circuit Breaker (Hystrix)</strong><a class="headerlink" href="#3-circuit-breaker-hystrix" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Circuit Breaker pattern, implemented with libraries like Netflix Hystrix, prevents a service from repeatedly calling a failing service. It provides fallback mechanisms and helps maintain system stability.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Configuring a Hystrix command with fallback:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@HystrixCommand</span><span class="p">(</span><span class="n">fallbackMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fallbackMethod&quot;</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">callService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="c1">// Call a remote service</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">fallbackMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="c1">// Fallback logic when the service is unavailable</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="4-saga-pattern">4. <strong>Saga Pattern</strong><a class="headerlink" href="#4-saga-pattern" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Saga pattern manages distributed transactions in Microservices by breaking them into smaller, independent steps. Each step is a separate service operation, allowing for compensation in case of failures.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Implementing a saga with Spring's <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/SagaEventHandler" title="GitHub User: SagaEventHandler">@SagaEventHandler</a> annotation:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Saga</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@Component</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderSaga</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nd">@Autowired</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OrderService</span><span class="w"> </span><span class="n">orderService</span><span class="p">;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nd">@StartSaga</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nd">@SagaEventHandler</span><span class="p">(</span><span class="n">associationProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orderId&quot;</span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">OrderCreatedEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="c1">// Create order and other steps</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nd">@EndSaga</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nd">@SagaEventHandler</span><span class="p">(</span><span class="n">associationProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orderId&quot;</span><span class="p">)</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">OrderCompletedEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="c1">// Handle order completion</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="5-event-sourcing-and-cqrs">5. <strong>Event Sourcing and CQRS</strong><a class="headerlink" href="#5-event-sourcing-and-cqrs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> Event Sourcing involves storing all changes to an application's state as a sequence of immutable events. Command Query Responsibility Segregation (CQRS) separates the command (write) and query (read) sides of the application.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Axon Framework for Event Sourcing and CQRS:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Define an event</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderCreatedEvent</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="c1">// Event details</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1">// Create an Aggregate</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nd">@Aggregate</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderAggregate</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nd">@AggregateIdentifier</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">orderId</span><span class="p">;</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="nd">@CommandHandler</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrderAggregate</span><span class="p">(</span><span class="n">CreateOrderCommand</span><span class="w"> </span><span class="n">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">        </span><span class="c1">// Apply events</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="nd">@EventSourcingHandler</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="n">OrderCreatedEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="c1">// Handle the event</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="6-bulkhead-pattern">6. <strong>Bulkhead Pattern</strong><a class="headerlink" href="#6-bulkhead-pattern" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Bulkhead pattern prevents the failure of one component from causing the failure of other components. It isolates services into separate pools or threads, ensuring that issues in one component do not affect others.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Hystrix thread pools to implement bulkheads:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@HystrixCommand</span><span class="p">(</span><span class="n">fallbackMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fallbackMethod&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">threadPoolKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;exampleThreadPool&quot;</span><span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">callService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="c1">// Execute in a separate thread pool</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">fallbackMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="c1">// Fallback logic when the service is unavailable</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="7-database-per-service">7. <strong>Database per Service</strong><a class="headerlink" href="#7-database-per-service" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> In the Database per Service pattern, each Microservice has its own database, ensuring that services are loosely coupled from a data perspective. This pattern can improve data isolation and scalability.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Spring Data JPA to define service-specific data repositories:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Entity</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Customer</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="c1">// Entity details</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nd">@Repository</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CustomerRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Customer</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="c1">// Custom queries for the customer service</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="8-aggregator-pattern">8. <strong>Aggregator Pattern</strong><a class="headerlink" href="#8-aggregator-pattern" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Aggregator pattern combines data from multiple Microservices into a single response, reducing the number of client requests. It is useful when clients require data from various services in a single request.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Implementing an aggregation service using Spring:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@RestController</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AggregatorController</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nd">@Autowired</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ServiceClient</span><span class="w"> </span><span class="n">serviceClient</span><span class="p">;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/aggregate&quot;</span><span class="p">)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">AggregateResponse</span><span class="w"> </span><span class="nf">aggregateData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="c1">// Call multiple services and combine responses</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="9-saga-orchestrator">9. <strong>Saga Orchestrator</strong><a class="headerlink" href="#9-saga-orchestrator" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Saga Orchestrator pattern coordinates the execution of a saga by controlling the order and timing of saga steps. It ensures that steps are executed in the correct sequence.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Implementing a saga orchestrator using a state machine framework like Spring State Machine:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nd">@Configuration</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nd">@EnableStateMachineFactory</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderSagaConfig</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">StateMachineConfigurerAdapter</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="n">StateMachineConfigurationConfigurer</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span><span class="n">config</span><span class="p">.</span><span class="na">withConfiguration</span><span class="p">().</span><span class="na">autoStartup</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="c1">// Define states, transitions, and event handlers</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="10-retry-pattern">10. <strong>Retry Pattern</strong><a class="headerlink" href="#10-retry-pattern" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Retry pattern is used to handle transient failures in Microservices communication. It involves automatically retrying an operation when it initially fails, helping to ensure that intermittent issues do not lead to service failures.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Spring Retry to implement a retry mechanism for service calls:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@Retryable</span><span class="p">(</span><span class="n">maxAttempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">backoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@Backoff</span><span class="p">(</span><span class="n">delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">callService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="c1">// Call a remote service with retry</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="11-back-pressure-pattern">11. <strong>Back Pressure Pattern</strong><a class="headerlink" href="#11-back-pressure-pattern" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Back Pressure pattern addresses scenarios where a fast producer of data overwhelms a slower consumer. It involves controlling the flow of data to prevent resource exhaustion in the consumer.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using reactive programming with Project Reactor to implement back pressure:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">Flux</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dataStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataProducer</span><span class="p">.</span><span class="na">generateData</span><span class="p">();</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">dataStream</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="p">.</span><span class="na">onBackpressureBuffer</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="c1">// Buffer up to 100 elements</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="p">.</span><span class="na">subscribe</span><span class="p">(</span><span class="n">dataConsumer</span><span class="p">::</span><span class="n">consumeData</span><span class="p">);</span>
+</span></code></pre></div>
+<h3 id="12-synchronous-communication-via-api">12. <strong>Synchronous Communication via API</strong><a class="headerlink" href="#12-synchronous-communication-via-api" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> While Microservices often use asynchronous communication, there are cases where synchronous communication via RESTful APIs is suitable, especially for simple, immediate interactions.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Implementing a synchronous RESTful API in Spring Boot:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@RestController</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserController</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nd">@Autowired</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/users/{id}&quot;</span><span class="p">)</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUserById</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">        </span><span class="c1">// Call UserService to fetch user data</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="13-polyglot-microservices">13. <strong>Polyglot Microservices</strong><a class="headerlink" href="#13-polyglot-microservices" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> The Polyglot Microservices pattern allows each Microservice to use a programming language and technology stack best suited to its requirements. This flexibility enhances developer productivity and system performance.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Developing one Microservice in Java, another in Python, and another in Node.js, each using its preferred stack.</p>
+</li>
+</ul>
+<h3 id="14-externalized-configuration">14. <strong>Externalized Configuration</strong><a class="headerlink" href="#14-externalized-configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> Externalized Configuration involves storing configuration settings outside the codebase, allowing Microservices to be configured independently without code changes. Spring Cloud Config is a popular tool for implementing this pattern.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Spring Cloud Config to externalize configuration:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">spring</span><span class="p">.</span><span class="na">application</span><span class="p">.</span><span class="na">name</span><span class="o">=</span><span class="n">my</span><span class="o">-</span><span class="n">service</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">spring</span><span class="p">.</span><span class="na">cloud</span><span class="p">.</span><span class="na">config</span><span class="p">.</span><span class="na">uri</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="c1">//config-server:8888</span>
+</span></code></pre></div>
+<h3 id="15-log-aggregation-and-monitoring">15. <strong>Log Aggregation and Monitoring</strong><a class="headerlink" href="#15-log-aggregation-and-monitoring" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> Log Aggregation and Monitoring patterns involve collecting logs and metrics from various Microservices to gain insights into the system's health and performance. Tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Prometheus and Grafana are commonly used for this purpose.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Configuring logback.xml for centralized logging using Logstash:</p>
+</li>
+</ul>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logstash&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;net.logstash.logback.appender.LogstashTcpSocketAppender&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nt">&lt;destination&gt;</span>logstash-server:4560<span class="nt">&lt;/destination&gt;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="cm">&lt;!-- Logstash encoder configuration --&gt;</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">&lt;encoder</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;net.logstash.logback.encoder.LogstashEncoder&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="nt">&lt;fieldNames&gt;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">            </span><span class="nt">&lt;timestamp&gt;</span>timestamp<span class="nt">&lt;/timestamp&gt;</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">            </span><span class="nt">&lt;version&gt;</span>version<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">            </span><span class="cm">&lt;!-- Add more field names as needed --&gt;</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">        </span><span class="nt">&lt;/fieldNames&gt;</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="nt">&lt;/encoder&gt;</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="nt">&lt;/appender&gt;</span>
+</span></code></pre></div>
+<h3 id="16-shared-database-with-schema-per-service">16. <strong>Shared Database with Schema per Service</strong><a class="headerlink" href="#16-shared-database-with-schema-per-service" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> In cases where a shared database is necessary, the Shared Database with Schema per Service pattern involves using a single database while isolating data by providing a separate schema for each Microservice. This separation minimizes data conflicts and provides service-level control.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Hibernate to define separate schemas for Microservices within a shared database:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nd">@Entity</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orders&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;order_service&quot;</span><span class="p">)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Order</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="c1">// Entity details</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="17-service-mesh-istio">17. <strong>Service Mesh (Istio)</strong><a class="headerlink" href="#17-service-mesh-istio" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> Service Mesh is a dedicated infrastructure layer for handling service-to-service communication. Tools like Istio provide features such as load balancing, security, and observability, enhancing Microservices communication and management.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Integrating Istio with Microservices for traffic management and security.</p>
+</li>
+</ul>
+<h3 id="18-event-driven-microservices-with-kafka">18. <strong>Event-Driven Microservices with Kafka</strong><a class="headerlink" href="#18-event-driven-microservices-with-kafka" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> Event-Driven Microservices rely on event streaming platforms like Apache Kafka to facilitate real-time data exchange between services. This pattern enables loosely coupled, highly scalable, and responsive systems.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Using Spring Kafka to produce and consume events in Microservices:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// Producer</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nd">@Autowired</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="kd">private</span><span class="w"> </span><span class="n">KafkaTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="p">;</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="s">&quot;topic-name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">}</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="c1">// Consumer</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;topic-name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;group-id&quot;</span><span class="p">)</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">receiveMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">    </span><span class="c1">// Process the received message</span>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="19-distributed-tracing-with-zipkin">19. <strong>Distributed Tracing with Zipkin</strong><a class="headerlink" href="#19-distributed-tracing-with-zipkin" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> Distributed tracing allows you to monitor and troubleshoot complex Microservices systems by tracking requests as they flow through different services. Zipkin is a popular tool for implementing distributed tracing.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Integrating Spring Cloud Sleuth with Zipkin for distributed tracing:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">// Add dependencies for Spring Cloud Sleuth and Zipkin</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">cloud</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">sleuth</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">cloud</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">zipkin</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="c1">// Configure Zipkin server in application.properties</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="n">spring</span><span class="p">.</span><span class="na">zipkin</span><span class="p">.</span><span class="na">base</span><span class="o">-</span><span class="n">url</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="c1">//zipkin-server:9411/</span>
+</span></code></pre></div>
+<h3 id="20-api-versioning">20. <strong>API Versioning</strong><a class="headerlink" href="#20-api-versioning" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Pattern Overview:</strong> As Microservices evolve, API changes can lead to compatibility issues with clients. The API Versioning pattern involves versioning your APIs to allow for backward compatibility while introducing new features.</p>
+</li>
+<li>
+<p><strong>Java Example:</strong> Implementing API versioning using URL path or request headers:</p>
+</li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// Versioning using URL path</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/v1/resource&quot;</span><span class="p">)</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getResourceV1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="c1">// Version 1 logic</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">}</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/v2/resource&quot;</span><span class="p">)</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getResourceV2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">    </span><span class="c1">// Version 2 logic</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Conclusion</p>
+<p>Microservices design patterns are crucial for addressing various challenges that arise when developing and maintaining Microservices-based applications. The patterns discussed in this comprehensive guide, along with their Java examples, offer valuable insights into building robust, scalable, and maintainable Microservices systems.</p>
+<p>By selecting the appropriate patterns for your specific use cases and combining them effectively, you can create Microservices architectures that are adaptable, resilient, and efficient. These patterns provide solutions to common architectural and operational challenges, allowing you to build agile and responsive software solutions that align with your organization's goals and requirements.</p>
+<hr />
+<h2 id="api-gateway">API Gateway<a class="headerlink" href="#api-gateway" title="Permanent link">&para;</a></h2>
+<p>The API Gateway pattern is an architectural design pattern commonly used in Microservices-based applications. It involves the use of a dedicated component called the API Gateway to act as a single entry point for client requests and manage the communication between clients and the various Microservices within the system. The API Gateway pattern is important in Microservices for several reasons:</p>
+<ol>
+<li>
+<p><strong>Request Routing:</strong> The API Gateway handles incoming client requests and routes them to the appropriate Microservices. It acts as a traffic cop, ensuring that each request reaches the correct service, eliminating the need for clients to know the specific endpoints of individual services. This simplifies the client's interaction with the system.</p>
+</li>
+<li>
+<p><strong>Load Balancing:</strong> The API Gateway can distribute incoming requests evenly among multiple instances of a Microservice, providing load balancing and ensuring that no single service instance is overwhelmed with traffic. This enhances the system's scalability and fault tolerance.</p>
+</li>
+<li>
+<p><strong>Authentication and Authorization:</strong> It can centralize authentication and authorization processes. The API Gateway can verify the identity of clients, validate their access rights, and enforce security policies, reducing the complexity of implementing security in each Microservice.</p>
+</li>
+<li>
+<p><strong>Caching:</strong> An API Gateway can implement caching mechanisms to store frequently requested data or responses, reducing the load on Microservices and improving response times for clients. Caching can be particularly useful for read-heavy operations.</p>
+</li>
+<li>
+<p><strong>Aggregation:</strong> In cases where a client's request involves data from multiple Microservices, the API Gateway can aggregate the data and provide a consolidated response to the client. This reduces the number of client-server interactions, improving efficiency.</p>
+</li>
+<li>
+<p><strong>Protocol Translation:</strong> Microservices may use different communication protocols or data formats. The API Gateway can perform protocol translation, allowing clients to use a standardized protocol, such as HTTP, while translating requests and responses to match the specific protocols of the underlying Microservices.</p>
+</li>
+<li>
+<p><strong>Logging and Monitoring:</strong> Centralized logging and monitoring can be implemented within the API Gateway to track incoming requests, monitor service health, and capture performance metrics. This helps in debugging, troubleshooting, and ensuring system reliability.</p>
+</li>
+<li>
+<p><strong>Version Management:</strong> API versioning can be managed at the API Gateway level, allowing for backward compatibility with older clients while introducing new features or changes to Microservices. This ensures that clients are not disrupted by service updates.</p>
+</li>
+<li>
+<p><strong>Rate Limiting and Throttling:</strong> To prevent abuse or overloading of Microservices, the API Gateway can enforce rate limiting and request throttling policies, ensuring fair resource allocation among clients and protecting the system from denial-of-service attacks.</p>
+</li>
+<li>
+<p><strong>Reduction of Cross-Cutting Concerns:</strong> The API Gateway abstracts cross-cutting concerns, such as security, logging, and monitoring, away from individual Microservices. This simplifies the development and maintenance of Microservices, allowing teams to focus on their core functionality.</p>
+</li>
+<li>
+<p><strong>Fault Tolerance:</strong> The API Gateway can help improve the overall fault tolerance of a Microservices system. It can implement retry mechanisms and circuit breakers to handle transient failures gracefully. For example, if a Microservice temporarily becomes unavailable, the API Gateway can retry the request or provide a fallback response, ensuring a better user experience.</p>
+</li>
+<li>
+<p><strong>Consolidated Analytics:</strong> By centralizing request and response handling, the API Gateway can capture valuable analytics and metrics about client interactions. This data can be used for performance analysis, capacity planning, and making informed decisions about system optimizations.</p>
+</li>
+<li>
+<p><strong>Simplified Client Development:</strong> Clients, whether web applications, mobile apps, or external services, benefit from a simplified and unified interface provided by the API Gateway. This simplification reduces the complexity of client-side development, as clients need to interact with a single entry point, rather than managing direct connections to numerous Microservices.</p>
+</li>
+<li>
+<p><strong>Cross-Cutting Concerns Enforcement:</strong> The API Gateway can enforce cross-cutting concerns, such as access control, logging, and content compression, consistently across all services. This ensures that important policies and practices are uniformly applied, reducing the risk of security vulnerabilities and inconsistent behavior.</p>
+</li>
+<li>
+<p><strong>Scalability and Elasticity:</strong> When the API Gateway is designed for scalability, it can be scaled independently of Microservices. This means that as the system's traffic increases, you can scale the API Gateway to handle the load without necessarily scaling each Microservice. This approach optimizes resource allocation and cost-effectiveness.</p>
+</li>
+<li>
+<p><strong>Simplified Testing and Documentation:</strong> With a single entry point for client interactions, testing and documenting the API become more straightforward. Clients can refer to well-documented API endpoints provided by the API Gateway, streamlining the integration process and reducing ambiguity.</p>
+</li>
+<li>
+<p><strong>Simplified Change Management:</strong> When Microservices evolve or new services are added, the API Gateway can act as a shield for clients from disruptive changes. It can manage versioning, handle requests that need to be routed to the old or new versions, and ensure a smooth transition.</p>
+</li>
+<li>
+<p><strong>Simplified Cross-Origin Resource Sharing (CORS) Handling:</strong> When dealing with client applications hosted on different domains, CORS becomes a concern. The API Gateway can manage CORS policies in a centralized manner, allowing or restricting cross-origin requests according to configured rules, thus simplifying cross-domain communication.</p>
+</li>
+<li>
+<p><strong>Unified Error Handling:</strong> The API Gateway can standardize error responses and codes, making it easier for clients to understand and handle errors consistently. It can also provide detailed error messages and logs, aiding in debugging and troubleshooting.</p>
+</li>
+<li>
+<p><strong>Enhanced Security Controls:</strong> Implementing security features like rate limiting, IP whitelisting, and DDoS protection is more manageable within the API Gateway. It provides a single point where security policies can be enforced, helping protect the entire Microservices ecosystem from threats and attacks.</p>
+</li>
+<li>
+<p><strong>Service Transformation:</strong> The API Gateway can perform data transformation, including data format conversion and data enrichment, to tailor responses to clients' needs. This can reduce the burden on Microservices, which can focus on providing raw data.</p>
+</li>
+<li>
+<p><strong>Scalable and Centralized Middleware:</strong> Middleware components like caching, logging, and compression can be centrally managed within the API Gateway. This reduces the need to replicate these components across various Microservices and ensures consistent behavior.</p>
+</li>
+<li>
+<p><strong>Reduced Network Overhead:</strong> By consolidating multiple requests into a single request or by caching responses, the API Gateway can reduce the overall network overhead and latency, resulting in improved system performance and responsiveness.</p>
+</li>
+<li>
+<p><strong>Granular Access Control:</strong> The API Gateway can implement fine-grained access control policies, ensuring that only authorized clients can access specific services or endpoints. This adds an additional layer of security and control.</p>
+</li>
+<li>
+<p><strong>Global Rate Limiting:</strong> In addition to per-service rate limiting, the API Gateway can apply global rate limits to prevent abuse of system resources. This helps maintain service quality and protects against misuse.</p>
+</li>
+<li>
+<p><strong>Dynamic Configuration:</strong> API Gateway configurations can be dynamic and updated in real-time, allowing for on-the-fly changes to routing rules, security policies, and other settings without requiring Microservices redeployment.</p>
+</li>
+<li>
+<p><strong>API Analytics and Insights:</strong> The API Gateway can collect detailed analytics and insights into how clients interact with the system. This information can be valuable for business intelligence, identifying trends, and making informed decisions.</p>
+</li>
+<li>
+<p><strong>API Rate Limiting:</strong> API Gateway can enforce rate limiting on incoming requests to prevent abuse and ensure fair resource allocation. This helps maintain system stability and prevents a single client or service from overwhelming the backend Microservices.</p>
+</li>
+<li>
+<p><strong>Authentication and Single Sign-On (SSO):</strong> API Gateway can handle authentication and SSO for clients, offloading the authentication process from individual Microservices. This centralization simplifies authentication management and improves security.</p>
+</li>
+<li>
+<p><strong>Content Compression:</strong> The API Gateway can compress responses before sending them to clients, reducing bandwidth usage and improving overall performance, especially for clients with limited network resources.</p>
+</li>
+<li>
+<p><strong>Distributed Tracing Integration:</strong> Integration with distributed tracing systems like Zipkin or Jaeger allows API Gateway to capture and trace requests across Microservices, providing insights into request flow and performance bottlenecks.</p>
+</li>
+<li>
+<p><strong>A/B Testing and Canary Releases:</strong> API Gateway can facilitate A/B testing and canary releases by routing a subset of requests to specific Microservice versions. This enables controlled experimentation and gradual deployments.</p>
+</li>
+<li>
+<p><strong>Request and Response Transformation:</strong> API Gateway can transform requests and responses, including data format conversion, filtering, and enrichment, ensuring that clients receive data in their preferred format or structure.</p>
+</li>
+<li>
+<p><strong>Global Error Handling:</strong> Centralized error handling in the API Gateway ensures that error responses are consistent and can be customized for different clients. It simplifies error management and reporting.</p>
+</li>
+<li>
+<p><strong>Consolidated Logging:</strong> Logging requests and responses at the API Gateway level provides a centralized view of system activities, simplifying troubleshooting and auditing.</p>
+</li>
+<li>
+<p><strong>Service Composition:</strong> In cases where a client request requires data from multiple Microservices, API Gateway can orchestrate service composition, fetching data from multiple sources and aggregating responses.</p>
+</li>
+<li>
+<p><strong>Resource Monitoring:</strong> API Gateway can monitor resource usage, performance, and health of Microservices, enabling proactive maintenance and scaling based on real-time data.</p>
+</li>
+<li>
+<p><strong>WebSocket Handling:</strong> API Gateway can handle WebSocket connections and routing, allowing for real-time communication between clients and Microservices.</p>
+</li>
+<li>
+<p><strong>Request Validation:</strong> API Gateway can validate incoming requests, ensuring that they adhere to predefined criteria and meet security standards before forwarding them to Microservices. This adds an additional layer of security and reduces the risk of malicious or malformed requests.</p>
+</li>
+<li>
+<p><strong>Consolidated Metrics and Monitoring:</strong> API Gateway can collect and consolidate metrics and monitoring data from various Microservices. This aggregated information provides a comprehensive view of system performance and helps identify bottlenecks or issues.</p>
+</li>
+<li>
+<p><strong>Centralized Access Logging:</strong> Logging access events and audit trails at the API Gateway level allows for centralized access control and auditing. This is crucial for compliance with security and regulatory requirements.</p>
+</li>
+<li>
+<p><strong>Dynamic Routing and Load Balancing:</strong> API Gateway can dynamically adjust routing and load balancing strategies based on real-time traffic and Microservice health. It helps in optimizing resource allocation and ensuring high availability.</p>
+</li>
+<li>
+<p><strong>API Documentation and Discovery:</strong> API Gateway can provide self-documentation of available services and endpoints, making it easier for developers to discover and understand the available APIs. This documentation can be generated automatically from Microservices metadata.</p>
+</li>
+<li>
+<p><strong>Health Checking:</strong> API Gateway can perform health checks on Microservices, monitoring their availability and response times. It can automatically route requests away from unhealthy instances, improving system reliability.</p>
+</li>
+<li>
+<p><strong>Geographical Routing:</strong> For global applications, API Gateway can route requests to geographically distributed Microservices instances, reducing latency and improving the user experience for clients in different regions.</p>
+</li>
+<li>
+<p><strong>Request Transformation:</strong> API Gateway can transform client requests into a format that Microservices understand. This can include mapping incoming data to the appropriate data model or schema for processing.</p>
+</li>
+<li>
+<p><strong>Security Token Exchange:</strong> API Gateway can handle security token exchange between different authentication providers or protocols, simplifying the integration of various security mechanisms within the Microservices ecosystem.</p>
+</li>
+<li>
+<p><strong>Scalable Analytics:</strong> By processing request and response data, the API Gateway can generate valuable analytics and insights, helping organizations make data-driven decisions and optimize system performance.</p>
+</li>
+<li>
+<p><strong>Service Version Management:</strong> The API Gateway can manage different versions of services, allowing clients to specify the desired version in their requests. This ensures backward compatibility while enabling service evolution.</p>
+</li>
+<li>
+<p><strong>Real-Time Monitoring and Alerts:</strong> API Gateway can offer real-time monitoring and alerting capabilities, notifying administrators of critical issues or anomalies in system behavior as they occur.</p>
+</li>
+</ol>
+<p>In summary, the API Gateway pattern is a versatile and crucial component in Microservices architecture, providing a wide range of capabilities that streamline client interactions, enhance security, improve scalability, and simplify the management of complex Microservices ecosystems. Its role in optimizing communication and centralizing various functions makes it an essential element for building robust and efficient Microservices-based applications.</p>
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.highlight", "search.suggest", "navigation.path", "navigation.top", "content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", {"palette": [{"media": "(prefers-color-scheme)", "toggle": {"icon": "material/link", "name": "Switch to light mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: light)", "primary": "indigo", "scheme": "default", "toggle": {"icon": "material/toggle-switch", "name": "Switch to dark mode"}}, {"accent": "indigo", "media": "(prefers-color-scheme: dark)", "primary": "black", "scheme": "slate", "toggle": {"icon": "material/toggle-switch-off", "name": "Switch to system preference"}}]}], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>
